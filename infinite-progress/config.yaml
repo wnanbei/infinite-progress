@@ -2,7 +2,7 @@ baseurl: https://wnanbei.com
 languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 10
-title: Infinite Progress
+title: WNANBEI - Infinite Progress
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -14,9 +14,9 @@ googleAnalytics:
 # 支持的语言: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk
 DefaultContentLanguage: zh-cn
 
-# Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
-# This will make .Summary and .WordCount behave correctly for CJK languages.
-hasCJKLanguage: false
+# 中日韩语言正常读取摘要
+hasCJKLanguage: true
+summaryLength: 70 
 
 permalinks:
     post: /post/:slug/
@@ -30,7 +30,7 @@ params:
     favicon:
 
     footer:
-        since: 2020
+        since: 2021
         customText:
 
     dateFormat:
@@ -38,12 +38,12 @@ params:
         lastUpdated: 2006-01-02 15:04:03
 
     sidebar:
-        emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        emoji: 
+        subtitle: The world has kissed my soul with its pain, asking for its return in songs. 
         avatar:
             enabled: true
             local: true
-            src: img/avatar.png
+            src: img/avatar.jpg
 
     article:
         math: true
@@ -66,7 +66,7 @@ params:
         archives:
             limit: 5
         tagCloud:
-            limit: 10
+            limit: 25
 
     opengraph:
         twitter:
@@ -110,7 +110,7 @@ menu:
     social:
         - identifier: github
           name: GitHub
-          url: https://github.com/CaiJimmy/hugo-theme-stack
+          url: https://github.com/wnanbei
           params:
             icon: brand-github
 
@@ -121,7 +121,6 @@ related:
     indices:
         - name: tags
           weight: 100
-
         - name: categories
           weight: 200
 
@@ -135,10 +134,12 @@ markup:
         ordered: true
         startLevel: 2
     highlight:
-        noClasses: false
+        noClasses: true
 
 # 开启 tags、categories、series 页面
 taxonomies:
     tag: "tags"
     category: "categories"
     seris : "series"
+
+enableGitInfo: true
