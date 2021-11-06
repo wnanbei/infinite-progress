@@ -1,8 +1,21 @@
+---
+title: "ElasticSearch CRUD 接口"
+date: 2021-11-06 16:17:25
+categories:
+  - ElasticSearch
+tags:
+  - Database
+  - ElasticSearch
+series:	
+---
+
 ElasticSearch 使用 HTTP 协议的 Restful 接口，来对接不同的程序系统。
 
-## 一、查询
+<!--more-->
 
-### 1. Get
+## 查询
+
+### Get
 
 读取一条文档。
 
@@ -10,7 +23,7 @@ ElasticSearch 使用 HTTP 协议的 Restful 接口，来对接不同的程序系
 GET index_name/_doc/id
 ```
 
-### 2. Mget
+### Mget
 
 批量读取文档。
 
@@ -48,7 +61,7 @@ GET index_name/_mget
 }
 ```
 
-### 3. Msearch
+### Msearch
 
 批量搜索文档
 
@@ -60,9 +73,9 @@ POST index_name/_msearch
 {"query" : {"match_all" : {}},"size":2}
 ```
 
-## 二、创建
+## 创建
 
-### 1. Create
+### Create
 
 创建一条文档，如果指定的 id 存在，则报错
 
@@ -80,7 +93,7 @@ PUT index_name/_doc/id?op_type=create
 - 不指定 `id` 时，系统会自动生成 id
 - 如果指定 `id`，则在 URI 中显式指定，如果指定的 id 存在，则报错
 
-### 2. Index
+### Index
 
 创建一条文档，如果指定的 id 存在，旧文档会被删除，插入新文档，文档版本信息 +1
 
@@ -88,9 +101,9 @@ PUT index_name/_doc/id?op_type=create
 PUT index_name/_doc/id
 ```
 
-## 三、更新
+## 更新
 
-### 1. Update
+### Update
 
 不会删除原文档，真正的数据更新
 
@@ -106,9 +119,9 @@ POST index_name/_update/id
 
 - Update 的内容必须放在 `doc` 字段中
 
-## 四、删除
+## 删除
 
-### 1. Delete
+### Delete
 
 删除一条文档
 
@@ -116,9 +129,9 @@ POST index_name/_update/id
 DELETE index_name/_doc/id
 ```
 
-## 五、批量操作
+## 批量操作
 
-### 1. Bulk
+### Bulk
 
 一次请求执行多条语句
 
@@ -133,9 +146,9 @@ POST _bulk
 { "doc" : {"field2" : "value2"} }
 ```
 
-## 六、工具
+## 工具
 
-### 1. Analyze
+### Analyze
 
 分词接口
 
