@@ -34,8 +34,8 @@ params:
         customText: The world has kissed my soul with its pain, asking for its return in songs. 
 
     dateFormat:
-        published: 2006-01-02
-        lastUpdated: 2006-01-02 15:04:03
+        published: 2006-01-02 15:04:05
+        lastUpdated: 2006-01-02 15:04:05
 
     sidebar:
         emoji: 
