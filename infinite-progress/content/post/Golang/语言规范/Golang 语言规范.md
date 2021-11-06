@@ -1,8 +1,6 @@
 ---
 title: "Golang 语言规范"
-description: Golang 语言规范指导性原则：简单性、可读性、生产力。
-summary: Golang 语言规范指导性原则：简单性、可读性、生产力。
-date: 2020-01-01 00:00:00
+date: 2019-01-01 00:00:00
 categories:
   - Golang 语言规范
 tags:
@@ -15,6 +13,8 @@ Golang 语言规范指导性原则：
 1. 简单性
 2. 可读性
 3. 生产力
+
+<!--more-->
 
 ## 命名
 

@@ -1,7 +1,6 @@
 ---
 title: "Golang 代码检查工具 golangci-lint"
-description: 
-date: 2020-01-01 00:00:00
+date: 2021-11-01 00:00:00
 categories:
   - Golang 语言规范
 tags:
@@ -18,7 +17,9 @@ series:
 - 包含了非常多种代码检查器
 - 可以集成到 CI 中
 
-以下是包含的代码检查器列表：[Linters](https://golangci-lint.run/usage/linters/)
+这是包含的代码检查器列表：[Linters](https://golangci-lint.run/usage/linters/)
+
+<!--more-->
 
 ## 安装
 
