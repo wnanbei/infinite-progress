@@ -2,7 +2,7 @@ baseurl: https://wnanbei.com
 languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 10
-title: WNANBEI - Infinite Progress
+title: WNANBEI
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -10,13 +10,13 @@ disqusShortname: hugo-theme-stack
 # GA Tracking ID
 googleAnalytics:
 
-# Theme i18n support
 # 支持的语言: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk
 DefaultContentLanguage: zh-cn
 
-# 中日韩语言正常读取摘要
-hasCJKLanguage: true
-summaryLength: 70 
+summaryLength: 70  # 自动摘要长度
+hasCJKLanguage: true # 中日韩语言正常读取摘要
+
+enableGitInfo: true # 允许获取 Git 文件信息，用于获取更新时间
 
 permalinks:
     post: /post/:slug/
@@ -27,11 +27,11 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:
+    favicon: img/avatar.jpg
 
     footer:
         since: 2021
-        customText:
+        customText: The world has kissed my soul with its pain, asking for its return in songs. 
 
     dateFormat:
         published: 2006-01-02
@@ -39,7 +39,7 @@ params:
 
     sidebar:
         emoji: 
-        subtitle: The world has kissed my soul with its pain, asking for its return in songs. 
+        subtitle: Infinite Progress.
         avatar:
             enabled: true
             local: true
@@ -61,7 +61,6 @@ params:
         enabled:
             - search
             - archives
-            # - categories
             - tag-cloud
         archives:
             limit: 5
@@ -81,11 +80,9 @@ params:
             local: false
             src:
 
-    colorScheme:
-        # Display toggle
-        toggle: true
-        # Available values: auto, light, dark
-        default: auto
+    colorScheme: # 颜色模式
+        toggle: true # 展示切换按钮
+        default: auto # 允许的值: auto, light, dark
 
     imageProcessing:
         cover:
@@ -93,9 +90,7 @@ params:
         content:
             enabled: true
 
-### Custom menu
-### See https://docs.stack.jimmycai.com/configuration/custom-menu.html
-### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
+# 自定义菜单
 menu:
     main:
         - identifier: home
@@ -103,11 +98,11 @@ menu:
           url: /
           weight: -100
           params:
-              ### For demonstration purpose, the home link will be open in a new tab
+              # For demonstration purpose, the home link will be open in a new tab
               newTab: false
               icon: home
 
-    social:
+    social: # 社交媒体头像
         - identifier: github
           name: GitHub
           url: https://github.com/wnanbei
@@ -129,11 +124,11 @@ markup:
         renderer:
             ## Set to true if you have HTML content inside Markdown
             unsafe: false
-    tableOfContents:
+    tableOfContents: # 文章大纲设置
         endLevel: 4
         ordered: true
         startLevel: 2
-    highlight:
+    highlight: # 高亮
         noClasses: true
 
 # 开启 tags、categories、series 页面
@@ -141,5 +136,3 @@ taxonomies:
     tag: "tags"
     category: "categories"
     seris : "series"
-
-enableGitInfo: true
