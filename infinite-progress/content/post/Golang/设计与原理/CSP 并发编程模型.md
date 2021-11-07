@@ -1,5 +1,5 @@
 ---
-title: "Golang 并发设计"
+title: "CSP 并发编程模型"
 description: 
 date: 2021-08-05
 categories:
@@ -11,11 +11,9 @@ series:
   - Golang 面试大全
 ---
 
-# Golang 并发设计
-
-## CSP 并发编程模型
-
 `CSP - Communicating Sequential Process`，通信顺序进程，是一种并发编程模型，用于描述两个独立的并发实体通过共享的通讯 channel 进行通信。
+
+<!--more-->
 
 CSP 中 channel 是第一类对象，它不关注发送消息的实体，而关注发送消息时使用的 channel。
 
