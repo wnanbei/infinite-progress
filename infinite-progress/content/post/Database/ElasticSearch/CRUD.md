@@ -19,7 +19,7 @@ ElasticSearch 使用 HTTP 协议的 Restful 接口，来对接不同的程序系
 
 读取一条文档。
 
-```json
+```javascript
 GET index_name/_doc/id
 ```
 
@@ -29,7 +29,7 @@ GET index_name/_doc/id
 
 **在请求体中指定 index：**
 
-```json
+```javascript
 GET _mget
 {
     "docs" : [
@@ -47,7 +47,7 @@ GET _mget
 
 **URI 中指定 index：**
 
-```json
+```javascript
 GET index_name/_mget
 {
     "docs" : [
@@ -65,7 +65,7 @@ GET index_name/_mget
 
 批量搜索文档
 
-```json
+```javascript
 POST index_name/_msearch
 {}
 {"query" : {"match_all" : {}},"size":1}
@@ -79,7 +79,7 @@ POST index_name/_msearch
 
 创建一条文档，如果指定的 id 存在，则报错
 
-```json
+```javascript
 POST index_name/_create
 PUT index_name/_create/id
 PUT index_name/_doc/id?op_type=create
@@ -97,7 +97,7 @@ PUT index_name/_doc/id?op_type=create
 
 创建一条文档，如果指定的 id 存在，旧文档会被删除，插入新文档，文档版本信息 +1
 
-```json
+```javascript
 PUT index_name/_doc/id
 ```
 
@@ -107,7 +107,7 @@ PUT index_name/_doc/id
 
 不会删除原文档，真正的数据更新
 
-```json
+```javascript
 POST index_name/_update/id
 {
     "doc":{
@@ -125,7 +125,7 @@ POST index_name/_update/id
 
 删除一条文档
 
-```json
+```javascript
 DELETE index_name/_doc/id
 ```
 
@@ -135,7 +135,7 @@ DELETE index_name/_doc/id
 
 一次请求执行多条语句
 
-```json
+```javascript
 POST _bulk
 { "index" : { "_index" : "test", "_id" : "1" } }
 { "field1" : "value1" }
@@ -152,7 +152,7 @@ POST _bulk
 
 分词接口
 
-```json
+```javascript
 GET _analyze
 {
   "analyzer": "standard",
