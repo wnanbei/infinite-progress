@@ -1,6 +1,6 @@
 ---
-title: "Golang 标准库 sync.Map"
-date: 2021-08-05
+title: "Golang 并发安全的 sync.Map"
+date: 2021-05-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -11,11 +11,13 @@ series:
   - Golang 面试大全
 ---
 
-## sync.Map
-
 `sync.Map` 是标准库 `sync` 中实现的并发安全的 map。
 
-### 1. 使用方式
+<!--more-->
+
+## 用法
+
+### 使用方式
 
 | 操作             | 普通 map       | sync.Map          |
 | :--------------- | :------------- | :---------------- |
@@ -50,7 +52,7 @@ syncMap.Range(func(key, value interface{}) bool {
 })
 ```
 
-### 2. 数据结构
+### 数据结构
 
 ```go
 type Map struct {
@@ -86,7 +88,7 @@ dirty 包含新写入的 key，并且包含 `read` 中的所有未被删除的 k
 - 每次在 read 中没找到数据，而在 dirty 中找到，则这个数字加 1。
 - 当 misses 大于 dirty 的数量时，会将 dirty 的数据整体复制到 read，并清空 dirty，此操作时间复杂度为 O(N)。
 
-### 3. 使用场景
+### 使用场景
 
 sync.Map 里面有两个普通 map，read map 主要负责读，dirty map 负责读和写（加锁）。
 
@@ -99,7 +101,7 @@ sync.Map 里面有两个普通 map，read map 主要负责读，dirty map 负责
 - 读多写少
 - 写操作多，但是修改的 key 和读取的 key 特别不重合。
 
-### 4. 执行流程
+### 执行流程
 
 **sync.Map.Load() 取出对象流程：**
 

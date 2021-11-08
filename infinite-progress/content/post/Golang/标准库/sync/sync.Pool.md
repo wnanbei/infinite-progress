@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 sync.Pool"
+title: "Golang 对象池 sync.Pool"
 description: 
-date: 2021-08-05
+date: 2021-05-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -12,11 +12,13 @@ series:
   - Golang 面试大全
 ---
 
-## sync.Pool
+sync.Pool 是一个协程安全的内存池。主要用于增加临时对象的内存复用率，减少内存分配和 GC STW 的开销。、
 
-sync.Pool 是一个协程安全的内存池。主要用于增加临时对象的内存复用率，减少内存分配和 GC STW 的开销。
+<!--more-->
 
-### 1. 使用方式
+## 用法
+
+### 使用方式
 
 **节选自 gin 的例子：**
 
@@ -37,7 +39,7 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 - `Put` 方法会把对象放回池子。调用之后仅把这个对象放回池子，池子里面的**对象什么时候真正释放不受外部控制**。
 
-### 2. 重点
+### 重点
 
 1. sync.Pool 是线程安全的，但 Pool.New 不是线程安全的，此函数可能被并发调用；
 2. sync.Pool 不能被复制；
@@ -47,7 +49,7 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 6. 在加入 `victim` 机制前，sync.Pool 里对象的最⼤缓存时间是一个 GC 周期，当 GC 开始时，没有被引⽤的对象都会被清理掉。加入 `victim` 机制后，最大缓存时间为两个 GC 周期；
 7. sync.Pool 的最底层使用切片加链表来实现双端队列，并将缓存的对象存储在切片中。
 
-### 3. 数据结构
+### 数据结构
 
 以下是 sync.Pool 的整体结构：
 
@@ -75,7 +77,7 @@ sync.Pool 的 local 是一个切片，存储了多个 `poolLocal` 对象，每�
   - 由所属的 P 来 Get 时，从队列头部取，也不需要加锁，理由同上。
   - 由其他 P 来 Get 时，只能从队列尾部取，由于其他 P 可能有多个，所以使用 CAS 来实现无锁。
 
-### 4. 执行流程
+### 执行流程
 
 **Pool.Get 执行流程：**
 
@@ -85,7 +87,7 @@ sync.Pool 的 local 是一个切片，存储了多个 `poolLocal` 对象，每�
 
 ![syncPoolPut](../../../assets/go/syncPoolPut.webp)
 
-### 5. victim 机制
+### victim 机制
 
 在 `golang 1.13` 版本中，新增了 victim 机制来优化 sync.Pool 的性能。
 

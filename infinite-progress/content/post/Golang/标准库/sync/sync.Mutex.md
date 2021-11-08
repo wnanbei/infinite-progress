@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 sync.Mutex"
+title: "Golang 互斥锁 sync.Mutex"
 description: 
-date: 2021-08-05
+date: 2021-05-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -12,11 +12,13 @@ series:
   - Golang 面试大全
 ---
 
-## sync.Mutex
-
 `sync.Mutex` 是一个互斥锁，默认为零值时为开锁状态。
 
-### 1. 使用方式
+<!--more-->
+
+## 用法
+
+### 使用方式
 
 Lock 方法锁住 m，如果 m 已经加锁，则阻塞直到 m 解锁。
 
@@ -30,7 +32,7 @@ Unlock 方法解锁 m，如果 m 未加锁会导致运行时错误。
 func (m *Mutex) Unlock()
 ```
 
-### 2. 数据结构
+### 数据结构
 
 ```go
 type Mutex struct {
@@ -59,7 +61,7 @@ const (
 
   sema 是一个信号量，用来实现阻塞/唤醒申请锁的 G。
 
-### 3. 执行流程
+### 执行流程
 
 **Mutex Lock 上锁流程：**
 
@@ -71,7 +73,7 @@ const (
 
 ![syncMutexUnlock](../../../assets/go/syncMutexUnlock.webp)
 
-### 4. 饥饿状态
+### 饥饿状态
 
 互斥锁有两种状态：正常状态和饥饿状态。
 
@@ -100,7 +102,7 @@ const (
 
 饥饿模式的作用是阻止尾部延迟的现象。
 
-### 5. 总结
+### 总结
 
 1. Mutex 不可被复制；
 2. 就算在较低 QPS 下，Mutex 的锁竞争也会比较激烈。如果一定要使用 Mutex，一定要采用取模分片的方式去使用其中一个 Mutex 进行资源控制，降低锁粒度；

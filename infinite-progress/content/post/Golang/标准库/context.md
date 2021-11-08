@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 context"
+title: "Golang 上下文 context"
 description: 
-date: 2021-08-05
+date: 2020-06-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -11,22 +11,22 @@ series:
   - Golang 面试大全
 ---
 
-# Context
-
-先简单的了解一下几种 ctx:
+context 指的是上下文，以下是几种 ctx 类型:
 
 - emptyCtx - 所有 ctx 类型的根，用 `context.TODO()`，或 `context.Background()` 来生成。
 - valueCtx - 主要就是为了在 ctx 中嵌入上下文数据，一个简单的 k 和 v 结构，同一个 ctx 内只支持一对 kv，需要更多的 kv 的话，会形成一棵树形结构。
 - cancelCtx - 用来取消程序的执行树，一般用 `WithCancel`，`WithTimeout`，`WithDeadline` 返回的取消函数本质上都是对应了 cancelCtx。
 - timerCtx - 在 cancelCtx 上包了一层，支持基于时间的 cancel。
 
+<!--more-->
+
 ## 用法
 
-### 1. 初始化 context
+### 初始化 context
 
 一般使用 `context.TODO()` 和 `context.Background()` 创建 context，是所有 context 的根，todo 和 background 两者本质上只有名字区别，在按 string 输出的时候会有区别。
 
-### 2. valueCtx
+### valueCtx
 
 valueCtx 主要就是用来携带贯穿整个逻辑流程的数据，使用 `WithValue` 创建。
 
@@ -51,7 +51,7 @@ func (c *valueCtx) Value(key interface{}) interface{} {
 }
 ```
 
-### 3. cancelCtx
+### cancelCtx
 
 cancelCtx 主要用于协程的控制，例如关闭协程。使用 `WithCancel` 创建。
 
@@ -72,7 +72,7 @@ go func() {
 cancelFn()
 ```
 
-### 4. timerCtx
+### timerCtx
 
 timerCtx 用于定时的取消任务。
 

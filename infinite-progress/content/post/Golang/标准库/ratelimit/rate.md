@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 golang.org/x/time/rate"
+title: "Golang 令牌桶限流器 golang.org/x/time/rate"
 description: 
-date: 2021-08-05
+date: 2021-10-25 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -11,13 +11,13 @@ series:
   - Golang 面试大全
 ---
 
-# golang.org/x/time/rate
-
 `golang.org/x/time/rate` 提供了一个使用令牌桶 `Token Bucket` 算法实现的限流器。
+
+<!--more-->
 
 ## 用法
 
-### 1. 创建限流器
+### 创建限流器
 
 ```go
 func NewLimiter(r Limit, b int) *Limiter
@@ -33,7 +33,7 @@ limit := Every(100 * time.Second)
 limiter := NewLimiter(limit, 1)
 ```
 
-### 2. 消费 Token
+### 消费 Token
 
 `golang.org/x/time/rate` 提供了三种方式消费 Token，这三种方式在令牌桶内令牌不足时，有不同的处理方式。
 
@@ -104,7 +104,7 @@ func (r *Reservation) OK() bool // 判断令牌桶是否能提供请求的令牌
 
 **在超出频率限制时，如果希望始终执行事件的，使用此方法。**
 
-### 3. 动态调整速率
+### 动态调整速率
 
 获取限制频率和桶容量大小：
 

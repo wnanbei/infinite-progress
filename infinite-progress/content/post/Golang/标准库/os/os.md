@@ -1,7 +1,6 @@
 ---
-title: "Golang 标准库 os"
-description: 
-date: 2021-08-05
+title: "Golang 系统库 os"
+date: 2020-05-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -9,7 +8,11 @@ tags:
 series:	
 ---
 
-## 一、OS 文件操作
+`os` 库主要用于 Golang 的文件、系统相关操作。
+
+<!--more-->
+
+## 文件操作
 
 导入模块
 
@@ -17,7 +20,7 @@ series:
 import "os"
 ```
 
-### 1. 打开文件
+### 打开文件
 
 函数：
 
@@ -55,7 +58,7 @@ if err != nil {
 defer file.Close()
 ```
 
-### 2. File 对象
+### File 对象
 
 #### 读取
 
@@ -106,7 +109,7 @@ func (f *File) SetReadDeadline(t time.Time) error
 func (f *File) SetWriteDeadline(t time.Time) error
 ```
 
-### 3. FileInfo 对象
+### FileInfo 对象
 
 描述文件信息的接口对象
 
@@ -121,9 +124,9 @@ type FileInfo interface {
 }
 ```
 
-## 二、OS 常用方法
+## 常用方法
 
-### 1. 文件操作
+### 文件操作
 
 ```go
 // 创建文件
@@ -144,7 +147,7 @@ func Truncate(name string, size int64) error
 func Stat(name string) (FileInfo, error)
 ```
 
-### 2. 环境变量
+### 环境变量
 
 ```go
 func Clearenv()  // 清除所有环境变量
@@ -154,7 +157,7 @@ func Setenv(key, value string) error  // 设置环境变量
 func Unsetenv(key string) error  // 取消某个环境变量
 ```
 
-### 3. 系统信息
+### 系统信息
 
 ```go
 func Getwd() (dir string, err error)  // 获取当前路径的绝对路径
@@ -168,7 +171,7 @@ func Getuid() int  // 获取调用者用户 ID
 func Geteuid() int  // 获取调用者有效的用户 ID
 ```
 
-### 4. 检查异常
+### 检查异常
 
 ```go
 func IsExist(err error) bool  // 检查是否是文件存在异常

@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 reflect"
+title: "Golang 反射 reflect"
 description: 
-date: 2021-08-05
+date: 2020-06-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -17,7 +17,9 @@ series:
 - 反射可以将`反射类型对象`转换为`接口类型变量`
 - 如果要修改`反射类型对象`，其值必须是`可写的(settable)`
 
-## 一、Type
+<!--more-->
+
+## Type
 
 `Type` 表示的是对象的具体类型。
 
@@ -40,7 +42,7 @@ func StructOf(fields []StructField) Type
 
 `Type` 本身是一个 reflect 库暴露出的接口，定义了许多方法，但根据其本身的具体类型，可以使用的方法并不相同。
 
-### 1. 通用方法
+### 方法
 
 ```go
 // 只返回类型名，不含包名
@@ -61,7 +63,7 @@ Comparable() bool
 Align() int
 ```
 
-### 2. Struct
+### Struct
 
 ```go
 // 返回 struct 字段数量，不是 struct 会 panic
@@ -84,7 +86,7 @@ NumMethod() int
 FieldAlign() int
 ```
 
-### 3. 函数
+### 函数
 
 ```go
 // 返回函数的参数数量，不是 func 会 panic
@@ -99,7 +101,7 @@ Out(i int) Type
 IsVariadic() bool
 ```
 
-### 4. Interface
+### Interface
 
 ```go
 // 检查当前类型有没有实现接口 u
@@ -110,7 +112,7 @@ AssignableTo(u Type) bool
 ConvertibleTo(u Type) bool
 ```
 
-### 5. 基础数据类型
+### 基础数据类型
 
 ```go
 // 返回 map 的 key 的类型，不是 map 会 panic
@@ -123,7 +125,7 @@ ChanDir() ChanDir
 Elem() Type
 ```
 
-## 二、创建和操作 Value
+## Value
 
 `Value` 表示的是对象的值。
 
@@ -133,7 +135,7 @@ Elem() Type
 func ValueOf(i interface{}) Value
 ```
 
-### 1. 创建 Value
+### 创建 Value
 
 以下这些方法可以创建指定类型的 `Value`：
 
@@ -148,7 +150,7 @@ func New(typ Type) Value
 func NewAt(typ Type, p unsafe.Pointer) Value
 ```
 
-### 2. 操作 Value
+### 操作 Value
 
 ```go
 // 将值添加到 Slice 中
@@ -163,7 +165,7 @@ func Select(cases []SelectCase) (chosen int, recv Value, recvOK bool)
 func Zero(typ Type) Value
 ```
 
-## 三、Value 方法
+## Value 方法
 
 `Value` 是一个定义的结构体，其有许多定义好的方法，根据其原始类型的不同，能使用的方法也不同。
 
@@ -175,7 +177,7 @@ type Value struct {
 }
 ```
 
-### 1. 获取具体类型值
+### 获取具体类型值
 
 使用这些方法可以获取到 `Value` 对应类型的具体的值。
 
@@ -194,7 +196,7 @@ func (v Value) Pointer() uintptr  // 获取指针
 func (v Value) UnsafeAddr() uintptr  // 获取 unsafe 包中的指针
 ```
 
-### 2. 通用方法
+### 通用方法
 
 这些通用方法基本上是所有类型都可以使用的方法。
 
@@ -222,7 +224,7 @@ func (v Value) OverflowUint(x uint64) bool
 func (v Value) OverflowComplex(x complex128) bool
 ```
 
-### 3. 更改值
+### 更改值
 
 以下这些方法可以更改 `Value` 的值，但必须符合底层类型。
 
@@ -241,7 +243,7 @@ func (v Value) SetString(x string)
 func (v Value) SetUint(x uint64)
 ```
 
-### 4. Struct
+### Struct
 
 ```go
 // 获取 struct 字段数量
@@ -262,7 +264,7 @@ func (v Value) Method(i int) Value
 func (v Value) MethodByName(name string) Value
 ```
 
-### 5. 混合类型方法
+### 混合类型方法
 
 这些混合类型方式是限定为一部分类型可用的。
 
@@ -277,7 +279,7 @@ func (v Value) Cap() int
 func (v Value) Index(i int) Value
 ```
 
-### 6. Channel
+### Channel
 
 ```go
 // Recv 和 Send 在没有完成操作时会阻塞
@@ -312,7 +314,7 @@ for iter.Next() {
 }
 ```
 
-### 8. Func
+### Func
 
 ```go
 // 调用函数 v，并将参数作为 Value 切片传入
@@ -321,7 +323,7 @@ func (v Value) Call(in []Value) []Value
 func (v Value) CallSlice(in []Value) []Value
 ```
 
-### 9. Interface
+### Interface
 
 ```go
 // 返回 v 的接口值或者指针
@@ -330,7 +332,7 @@ func (v Value) CanInterface() bool
 func (v Value) InterfaceData() [2]uintptr
 ```
 
-## 四、Kind
+## Kind
 
 `Kind` 表示的是对象的原生底层类型。有以下这些类型：
 
@@ -368,7 +370,7 @@ const (
 
 还有一个 `func (k Kind) String() string` 方法可以返回 Kind 的名称。
 
-## 五、StructField
+## StructField
 
 此结构体用来表示 Struct 的字段：
 
@@ -384,7 +386,7 @@ type StructField struct {
 }
 ```
 
-## 六、StructTag
+## StructTag
 
 此类型用来表示 Struct 字段的 Tag 字符串，其有两个方法可以获取 Tag 中设定的值。
 

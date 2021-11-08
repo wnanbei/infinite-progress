@@ -1,5 +1,5 @@
 ---
-title: "Golang 标准库 strings"
+title: "Golang 字符串处理 strings"
 description: 
 date: 2021-08-05
 categories:
@@ -9,11 +9,11 @@ tags:
 series:	
 ---
 
-## 一、strings
-
 作为一种基本数据结构，每种语言都有一些对于字符串的预定义处理函数。Go 中使用 `strings` 包来完成对字符串的主要操作。
 
-### 1. 判断前后缀
+<!--more-->
+
+### 判断前后缀
 
 ```go
 // 判断字符串 s 是否以 prefix 开头
@@ -22,14 +22,14 @@ strings.HasPrefix(s, prefix string) bool
 strings.HasSuffix(s, suffix string) bool
 ```
 
-### 2. 判断包含关系
+### 判断包含关系
 
 ```go
 // 判断字符串 s 是否包含 substr
 strings.Contains(s, substr string) bool
 ```
 
-### 3. 判断位置
+### 判断位置
 
 `Index` 返回字符串 `str` 在字符串 `s` 中的索引（`str` 的第一个字符的索引），-1 表示字符串 `s` 不包含字符串 `str`：
 
@@ -49,7 +49,7 @@ strings.LastIndex(s, str string) int
 strings.IndexRune(s string, r rune) int
 ```
 
-### 4. 替换
+### 替换
 
 `Replace` 用于将字符串 `str` 中的前 `n` 个字符串 `old` 替换为字符串 `new`，并返回一个新的字符串，如果 `n = -1` 则替换所有字符串 `old` 为字符串 `new`：
 
@@ -57,21 +57,21 @@ strings.IndexRune(s string, r rune) int
 strings.Replace(str, old, new, n) string
 ```
 
-### 5. 统计出现次数
+### 统计出现次数
 
 ```go
 // 计算字符串 str 在字符串 s 中出现的非重叠次数
 strings.Count(s, str string) int
 ```
 
-### 6. 重复字符串
+### 重复字符串
 
 ```go
 // 用于重复 count 次字符串 s 并返回一个新的字符串：
 strings.Repeat(s, count int) string
 ```
 
-### 7. 大小写
+### 大小写
 
 ```go
 // 将字符串中的 Unicode 字符全部转换为相应的小写字符
@@ -80,7 +80,7 @@ strings.ToLower(s) string
 strings.ToUpper(s) string
 ```
 
-### 8. 裁剪前后
+### 裁剪前后
 
 修剪掉 s 字符串前后，由 unicode 指定的空格字符，包括 `\n\t\r\n`
 
@@ -111,7 +111,7 @@ func TrimPrefix(s, prefix string) string
 func TrimSuffix(s, suffix string) string
 ```
 
-### 9. 分割字符串
+### 分割字符串
 
 `strings.Fields(s)` 将会利用 1 个或多个空白符号来作为动态长度的分隔符将字符串分割成若干小块，并返回一个 slice，如果字符串只包含空白符号，则返回一个长度为 0 的 slice。
 
@@ -119,13 +119,13 @@ func TrimSuffix(s, suffix string) string
 
 因为这 2 个函数都会返回 slice，所以习惯使用 for-range 循环来对其进行处理。
 
-### 10. 拼接
+### 拼接
 
 ```go
 strings.Join(sl []string, sep string) string
 ```
 
-### 11. 从字符串中读取内容
+### 从字符串中读取内容
 
 函数 `strings.NewReader(str)` 用于生成一个 `Reader` 并读取字符串中的内容，然后返回指向该 `Reader`的指针，从其它类型读取内容的函数还有：
 

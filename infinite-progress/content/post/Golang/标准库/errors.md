@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 errors"
+title: "Golang 错误处理 errors"
 description: 
-date: 2021-08-05
+date: 2020-06-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -9,7 +9,11 @@ tags:
 series:	
 ---
 
-## 一、Errors
+`errors` 用于增强 Golang 的错误处理能力。
+
+<!--more-->
+
+## Errors
 
 `error` 类型为一个接口，其定义为：
 
@@ -19,7 +23,7 @@ type error interface {
 }
 ```
 
-### 1. Error()
+### Error
 
 `Error()` 函数返回一个字符串，用以表示这个 `error` 类型。
 
@@ -29,7 +33,7 @@ func (e *error) Error() string (
 )
 ```
 
-### 2. Wrap 嵌套
+### Wrap
 
 Go 1.13 中新增，可以将 `error` 嵌套起来，形成多层结构。
 
@@ -66,7 +70,7 @@ e := errors.New("原始错误")
 w := &NewError{err: e, msg: "wrap了一个错误"}
 ```
 
-### 3. errors.Unwrap()
+### Unwrap
 
 Go 1.13 新增，这个函数可以把嵌套在 `error` 中的 `error` 取出。
 
@@ -74,7 +78,7 @@ Go 1.13 新增，这个函数可以把嵌套在 `error` 中的 `error` 取出。
 func Unwrap(err error) error
 ```
 
-### 4. errors.Is()
+### Is
 
 用来判断 `err` 或者其嵌套链中，是否有 `target` 类型的异常，只能判断已经生成的特定类型 `error`，也就是所谓的哨兵异常。
 
@@ -88,7 +92,7 @@ func Is(err error, target error) bool
 if errors.Is(err, os.ErrExist)
 ```
 
-### 5. errors.As()
+### As
 
 用来判断 `err` 或者其嵌套链中，是否有 `target` 的异常，如果有，就将符合类型的 `err` 赋值给 `target`。
 

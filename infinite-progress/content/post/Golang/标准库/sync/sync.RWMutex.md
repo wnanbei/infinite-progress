@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 sync.RWMutex"
+title: "Golang 读写锁 sync.RWMutex"
 description: 
-date: 2021-08-05
+date: 2021-05-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -12,11 +12,13 @@ series:
   - Golang 面试大全	
 ---
 
-## sync.RWMutex
-
 `sync.RWMutex` 是一个读写锁，在读多写少的场景中，比 Mutex 的并发能力有很大的提升。
 
-### 1. 使用方式
+<!--more-->
+
+## 用法
+
+### 使用方式
 
 读写锁的读锁与写锁、写锁与写锁互斥，读锁与读锁之间互不影响。
 
@@ -27,7 +29,7 @@ func (rw *RWMutex) RLock        // 读锁加锁
 func (rw *RWMutex) RUnlock      // 读锁解锁
 ```
 
-### 2. 数据结构
+### 数据结构
 
 ```go
 type RWMutex struct {
@@ -56,7 +58,7 @@ type RWMutex struct {
 
 **`readerWait`** - 写操作请求锁时，需要等待完成的读操作数量。
 
-### 3. 总结
+### 总结
 
 读写互斥锁在互斥锁之上提供了额外的更细粒度的控制，能够在读操作远远多于写操作时提升性能。
 

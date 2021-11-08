@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 time"
+title: "Golang 时间处理库 time"
 description: 
-date: 2021-08-05
+date: 2020-06-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -9,17 +9,13 @@ tags:
 series:	
 ---
 
-### 常用函数
+time 是 Golang 用于处理时间的标准库，包括格式化、计算、修改、定时、超时等功能。
 
-休眠，暂停当前协程
+<!--more-->
 
-```go
-func Sleep(d Duration)
-```
+## 格式
 
-## 一、格式化
-
-### 1. 时间占位符
+### 时间占位符
 
 常用：`2006-01-02 15:04:05`
 
@@ -35,7 +31,7 @@ func Sleep(d Duration)
 - 时区：MST
 - 时区偏移：-700
 
-### 2. 常量
+### 常量
 
 ```go
 const (
@@ -58,9 +54,9 @@ const (
 )
 ```
 
-## 二、时间点 Time
+## Time 时间点
 
-### 1. 初始化
+### 初始化
 
 当前时间
 
@@ -96,7 +92,13 @@ func Unix(sec int64, nsec int64) Time
 time.Unix(1571818205, 67868768768)
 ```
 
-### 2. Time 函数
+### Time 方法
+
+休眠，暂停当前协程
+
+```go
+func Sleep(d Duration)
+```
 
 格式化时间点
 
@@ -162,9 +164,9 @@ func (t Time) Equal(u Time) bool
 func (t Time) IsZero() bool  
 ```
 
-## 三、时间段 Duartion
+## Duartion 时间段
 
-### 1. Duartion 常量
+### 常量
 
 ```go
 type Duration int64
@@ -220,7 +222,7 @@ const (
 )
 ```
 
-### 2. Duartion 函数
+### 方法
 
 解析字符串生成时间段
 
@@ -240,9 +242,9 @@ func (d Duration) Microseconds() int64  // 微秒
 func (d Duration) Nanoseconds() int64  // 纳秒
 ```
 
-## 四、计算修改时间
+## 计算修改时间
 
-### 1. 修改时间
+### 修改时间
 
 ```go
 // 加上时间
@@ -251,7 +253,7 @@ func (t Time) Add(d Duration) Time
 func (t Time) AddDate(years int, months int, days int) Time
 ```
 
-### 2. 计算时间
+### 计算时间
 
 ```go
 // 减去时间
@@ -262,14 +264,14 @@ func Since(t Time) Duration
 func Until(t Time) Duration
 ```
 
-### 3. 时间点取整
+### 时间点取整
 
 ```go
 func (t Time) Round(d Duration) Time
 func (t Time) Truncate(d Duration) Time
 ```
 
-## 五、时区
+## 时区
 
 ```go
 // 获取时间点的时区
@@ -284,9 +286,9 @@ func (t Time) UTC() Time
 func (t Time) In(loc *Location) Time  
 ```
 
-## 六、定时与超时
+## 定时与超时
 
-### 1. Timer
+### Timer
 
 此函数等待指定时间后，然后在返回的通道中发送当前时间。
 
@@ -324,7 +326,7 @@ func (t *Timer) Reset(d Duration) bool
 func (t *Timer) Stop() bool
 ```
 
-### 2. Ticker
+### Ticker
 
 此函数是 Ticker 的简单封装，可以返回一个通道，此通道间隔指定时间发送当前时间，注意的是，由于无法关闭底层 Ticker，此通道是默认泄露的。
 

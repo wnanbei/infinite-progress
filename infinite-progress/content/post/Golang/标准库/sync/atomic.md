@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 atomic"
+title: "Golang 原子操作 atomic"
 description: 
-date: 2021-08-05
+date: 2021-05-05 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -12,16 +12,18 @@ series:
   - Golang 面试大全
 ---
 
-## 一、Atomic
-
 `atomic` 包封装了系统底层的原子操作。官方建议尽量少使用此包的原子操作，尽量遵循通过通信分享内存，而不是通过分享内存来通信的原则。
 
 这个包的方法有以下特点：
 
-- 方法操作的都是 `int` 系列类型或指针
-- 操作的数据需要其地址
+- 方法操作的都是 `int` 系列类型或指针。
+- 操作的数据需要其地址。
 
-### 1. 加法
+<!--more-->
+
+## 用法
+
+### 加法
 
 原子性的将 `delta` 与 `addr` 相加，并返回新值。
 
@@ -47,7 +49,7 @@ AddUint32(&x, ^uint32(0))
 AddUint64(&x, ^uint64(0))
 ```
 
-### 2. 读取
+### 读取
 
 原子性的读取 `addr` 的值。
 
@@ -60,7 +62,7 @@ func LoadUintptr(addr *uintptr) (val uintptr)
 func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer)
 ```
 
-### 3. 存储
+### 存储
 
 原子性的将值 `val` 存储到 `addr`。
 
@@ -73,7 +75,7 @@ func StoreUintptr(addr *uintptr, val uintptr)
 func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer)
 ```
 
-### 4. 交换
+### 交换
 
 原子性的将值 `new` 交换给 `addr`，并返回旧值。
 
@@ -98,7 +100,7 @@ func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapp
 func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapped bool)
 ```
 
-### 5. Value
+### Value
 
 `Value` 是 `atomic` 包中用来存储任意类型值的容器。主要有两个方法：
 

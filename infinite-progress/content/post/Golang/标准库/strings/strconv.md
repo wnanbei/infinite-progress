@@ -1,5 +1,5 @@
 ---
-title: "Golang 标准库 strconv"
+title: "Golang 字符串类型转换 strconv"
 description: 
 date: 2021-08-05
 categories:
@@ -9,13 +9,13 @@ tags:
 series:	
 ---
 
-## strconv
-
-该包包含了一些变量用于获取程序运行的操作系统平台下 int 类型所占的位数，如：`strconv.IntSize`。
+Strconv 包含了一些变量用于获取程序运行的操作系统平台下 int 类型所占的位数，如：`strconv.IntSize`。
 
 任何类型 **T** 转换为字符串总是成功的。
 
-### 1. Int
+<!--more-->
+
+### Int
 
 ```go
 // int 转 string
@@ -24,7 +24,7 @@ strconv.Itoa(i int) string
 strconv.Atoi(s string) (i int, err error)
 ```
 
-### 2. Float
+### Float
 
 ```go
 // float 转 string

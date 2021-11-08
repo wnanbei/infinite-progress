@@ -1,7 +1,7 @@
 ---
-title: "Golang 标准库 http"
+title: "Golang net/http client 客户端"
 description: 
-date: 2021-08-05
+date: 2019-01-01 00:00:00
 categories:
   - Golang 标准库
 tags:
@@ -9,55 +9,18 @@ tags:
 series:	
 ---
 
-## 一、简介
+Golang 中的`net`包封装了大部分网络相关的功能，我们基本不需要借助其他库就能实现我们的爬虫需求。
 
-Golang 诞生已经超过十个年头了，发展得愈发完善，其简单方便的协程并发机制使得其在爬虫领域有着一定的天赋。
+<!--more--> 
 
-首先我们来看一看，Golang 相对于 Python 这个爬虫领域的传统强者，有哪些优点和缺点。
+## 简单请求
 
-优点：
-
-- 完善简便的协程并发机制
-- 并发数量大
-- 占用资源少
-- 运行速度更快
-- 部署方便
-
-缺点：
-
-- 数据处理比较繁琐
-- 成熟工具不是很多
-- 资料较少
-- 实现相同逻辑需要的代码更多
-
-由于Golang本身静态语言的特性，和其特别的异常处理方式等等原因，在发起较复杂的请求时需要的代码量自然会比Python多不少，但是其并发的数量也是远超Python的，所以两者应用的场景并不十分相同，我们可以根据需要灵活的选择。
-
-在刚刚接触Golang的http包时，觉得其非常的方便，发起请求只需要一行代码：
-
-```go
-http.Get("https://www.baidu.com")
-```
-
-就算与Python的`requests`在便利方面也不遑多让，然而在Golang勾起了我的兴趣，并深入接触后，我发现并非如此。最简单的`http.Get`方法只能发起最简单的请求，一旦要设置headers、cookies等属性时，需要写的代码会成几何倍数上升，而设置代理或者管理重定向等操作，会更加复杂。
-
-这个摸索的过程中最痛苦的是，在网上能找到资料非常的稀少，大多数时候只能阅读官方文档和阅读`net`标准库的源码。所幸Go语言的特性使得阅读Go源码是一件比较简单的事，相对于其他语言来说。
-
-所以本篇文章的目的，是为了让那些使用Golang的朋友，对如何使用Golang发起请求有一个比较全面的了解。
-
-**注1：Golang中文官网的文档版本比较低，有些地方与最新版本不同，有条件的同学可以爬爬梯子，去golang.org英文官网看文档。**
-
-**注2：文中代码为了简洁，省略掉了异常处理的部分，实际使用时需要按情况加上。**
-
-***
-
-## 二、简单请求
-
-Golang中的`net`包封装了大部分网络相关的功能，我们基本不需要借助其他库就能实现我们的爬虫需求。其中最为常用的是`http`和`url`，使用前可以根据我们的需要进行导入：
+其中最为常用的是 `http` 和 `url`，使用前可以根据我们的需要进行导入：
 
 ```go
 import (
 	"net/http"
-    "net/url"
+	"net/url"
 )
 ```
 
@@ -86,9 +49,7 @@ body, err := ioutil.ReadAll(resp.Body)  // 读取Body
 
 这样的请求方式是非常方便的，但是当我们需要定制我们请求的其他参数时，就必须要使用其他组件了。
 
-***
-
-## 三、Client
+## Client
 
 `Client`是`http`包内部发起请求的组件，使用它，我们才可以去控制请求的超时、重定向和其他的设置。以下是Client的定义：
 
@@ -115,7 +76,7 @@ resp, err := client.Get("http://example.com")
 
 但这种方法与直接使用`http.Get`没多大差别，我们需要使用另一个方法来定制请求的Header、请求体、证书验证等参数，这就是`Request`和`Do`。
 
-### 1. 设置超时
+### 设置超时
 
 这是一张说明Client超时的控制范围的图：
 
@@ -156,7 +117,7 @@ c := &http.Client{
 
 可以看到这其中没有单独控制`Do`方法超时时间的设置，如果需要的话可以使用`context`自行实现。
 
-### 2. 控制重定向
+### 控制重定向
 
 在Client的字段中，有一个`CheckRedirect`，此字段就是用来控制重定向的函数，如果没有定义此字段的话，将会使用默认的`defaultCheckRedirect`方法。
 
@@ -204,7 +165,7 @@ client.CheckRedirect = yourCheckRedirect
 
 禁止重定向则可以把判断数字修改为0。最好相应地修改errors中提示的信息。
 
-### 3. CookieJar管理
+### CookieJar管理
 
 可以看到Client结构体中还有一个`Jar`字段，类型为`CookieJar`，这是Client用来管理Cookie的对象。
 
@@ -237,9 +198,7 @@ client := &http.Client{
 import "golang.org/x/net/publicsuffix"
 ```
 
-***
-
-## 四、 Request
+## Request
 
 这是Golang源码中Request定义的字段，可以看到非常的多，有兴趣的可以去源码或者官方文档看有注释的版本，本文只介绍一些比较重要的字段。
 
@@ -284,17 +243,17 @@ req, err := NewRequest("GET", "https://www.baidu.com", nil)
 resp, err := client.Do(req)
 ```
 
-### 1. Method
+### Method
 
 请求方法，必备的参数，如果为空字符则表示Get请求。
 
 注：Go的HTTP客户端不支持`CONNECT`请求方法。
 
-### 2. URL
+### URL
 
 一个被解析过的url结构体。
 
-### 3. Proto
+### Proto
 
 HTTP协议版本。
 
@@ -302,7 +261,7 @@ HTTP协议版本。
 
 如果希望强制使用`HTTP2.0`的协议，那么需要使用`golang.org/x/net/http2`这个包所提供的功能。
 
-### 4. 发起Post请求
+### 发起Post请求
 
 如果要使用Request发起Post请求，提交表单的话，可以用到它的`PostForm`字段，这是一个类型为`url.Values`的字段，以下为示例：
 
@@ -313,7 +272,7 @@ req.PostForm.Add("key", "value")
 
 如果你Post提交的不是表单数据，那么你需要将其封装成`io.Reader`类型，并在`NewRequest`函数中传递进去。
 
-### 5. 设置Header
+### 设置Header
 
 Header的类型是`http.Header`，其中包含着之前请求中返回的header和client发送的header。
 
@@ -326,7 +285,7 @@ req.Header.Add("key", "value")
 
 Header还有一些`Set`、`Del`等方法可以使用。
 
-### 6. 添加Cookie
+### 添加Cookie
 
 前文我们已经介绍了如何在Client中启用一直使用的CookieJar，使用它可以自动管理获得的Cookie。
 
@@ -364,9 +323,7 @@ c := &http.Cookie{
 req.AddCookie(c)
 ```
 
-***
-
-## 五、Transport
+## Transport
 
 `Transport`是`Client`中的一个类型，用于控制传输过程，是Client实际发起请求的底层实现。如果没有给这个字段初始化相应的值，那么将会使用默认的`DefaultTransport`。
 
@@ -398,7 +355,7 @@ type Transport struct {
 
 由于`Transport`是`Client`内部请求的实际发起者，所以内容会比较多，1.6之后的版本也添加了许多新的字段，这里我们来讲解常见的一些字段。
 
-### 1. 拨号
+### 拨号
 
 由于Client中设置的Timeout范围比较宽，而在生产环境中我们可能需要更为精细的超时控制，在`Dial`拨号中可以设置几个超时时间。
 
@@ -429,7 +386,7 @@ trans := &http.Transport{
 }
 ```
 
-### 2. 设置代理
+### 设置代理
 
 Transport第一个`Proxy`字段是用来设置代理，支持HTTP、HTTPS、SOCKS5三种代理方式，首先我们来看看如何设置HTTP和HTTPS代理：
 
@@ -484,7 +441,7 @@ func main() {
 
 这里的`proxy.SOCKS5`函数将会返回一个`Dialer`对象，其传入的参数分别为协议、IP端口、账号密码、`Dialer`，如果代理不需要账号密码验证的话，第三个字段可以设置为`nil`。
 
-### 3. 连接控制
+### 连接控制
 
 众所周知，HTTP1.0协议使用的是短连接，而HTTP1.1默认使用的是长连接，使用长连接则可以复用连接，减少建立连接的开销。
 
@@ -521,11 +478,9 @@ trans := &http.Transport{
 
 由于Transport负担起了连接池的功能，所以在并发使用时，最好将Transport与Client一起复用，不然可能会造成发起过量的长连接，浪费系统资源。
 
-***
+## 其他
 
-## 六、其他
-
-### 1. 设置url参数
+### 设置url参数
 
 在Go的请求方式中，没有给我们提供可以直接设置url参数的方法，所以需要我们自己在url地址中进行拼接。
 
@@ -542,17 +497,7 @@ fmt.Println(URL)
 // 输出为：http://httpbin.org/get&key1=value&key2=value2&key2=value3
 ```
 
-***
-
-## 七、总结
-
-总的来说，Go语言中内置的标准库功能是比较完善的，如果要写一个客户端的话，基本不需要用到标准库之外的内容，其可以控制的请求细节也比较多。
-
-但相较于Python的Requests这类库，需要写的代码依然要多非常多，再加上特别的异常处理机制，在请求过程中要写大量的异常检查语句。需要使用的朋友可以考虑先将请求和异常处理的部分封装以后使用。
-
-***
-
-## 八、示例
+## 示例
 
 以下是发起Get请求的一个例子：
 
@@ -578,13 +523,5 @@ body, err := ioutil.ReadAll(resp.Body)
 if err != nil {
     fmt.Println(err)
 }
-fmt.Println(string(body))
+fmt.Println(string(body))<https://colobu.com/2016/07/01/the-complete-guide-to-golang-net-http-timeouts/>)
 ```
-
-**参考：**
-
-[https://www.cnblogs.com/WingPig/p/5929138.html](https://www.cnblogs.com/WingPig/p/5929138.html)
-
-[http://mengqi.info/html/2015/201506062329-socks5-proxy-client-in-golang.html](http://mengqi.info/html/2015/201506062329-socks5-proxy-client-in-golang.html)
-
-[<https://colobu.com/2016/07/01/the-complete-guide-to-golang-net-http-timeouts/>](<https://colobu.com/2016/07/01/the-complete-guide-to-golang-net-http-timeouts/>)
