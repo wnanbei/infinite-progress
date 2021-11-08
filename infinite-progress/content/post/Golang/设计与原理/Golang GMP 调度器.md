@@ -1,7 +1,7 @@
 ---
 title: "Golang GMP 调度器"
 description: 
-date: 2021-08-01
+date: 2021-08-01 00:00:00
 categories:
   - Golang 设计与原理
 tags:
@@ -9,6 +9,7 @@ tags:
   - Concurrency
 series:	
   - Golang 面试大全
+typora-root-url: ..\..\..\..\static
 ---
 
 
@@ -16,8 +17,6 @@ series:
 GMP Scheduler 是 Runtime 中几乎最重要的组件，它的作用是：
 
 > For scheduling goroutines onto kernel threads.
-
-![](../../../../static/images/GMP模型.jpeg)
 
 GMP Scheduler 的核心思想是：
 
@@ -27,6 +26,8 @@ GMP Scheduler 的核心思想是：
 Go scheduler 的职责就是将所有处于 runnable 的 Goroutines 均匀分布到在 P 上运行的 M，利用多核并行，实现更强大的并发。
 
 <!--more-->
+
+![](/images/go/GMP模型.jpeg)
 
 ## GMP 数据结构
 
@@ -162,7 +163,7 @@ M 与 P 的数量没有绝对关系，一个 M 阻塞，P 就会去创建或者�
 
 ## 调度流程
 
-![Go调度器生命周期](../assets/go_schedule.png)
+![Go调度器生命周期](/images/go/go_schedule.png)
 
 ### M0
 

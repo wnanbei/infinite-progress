@@ -1,7 +1,7 @@
 ---
 title: "Golang 第三方库 viper"
 description: 
-date: 2021-08-05
+date: 2021-08-05 00:00:00
 categories:
   - Golang 第三方库
 tags:
@@ -21,9 +21,11 @@ go get github.com/spf13/viper
 
 `json`, `toml`, `yaml`, `yml`, `properties`, `props`, `prop`, `hcl`, `dotenv`, `env`, `ini`
 
-## 一、初始化
+<!--more-->
 
-### 1. 读取配置
+## 初始化
+
+### 读取配置
 
 设置读取配置的文件，此方法需要显式的指定配置文件的路径、名称和扩展名，使用此方法设定后，`Viper` 将不会再去其他路径寻找配置文件。
 
@@ -44,7 +46,7 @@ func SetConfigName(in string)
 func ReadInConfig() error
 ```
 
-### 2. 设置默认值
+### 设置默认值
 
 ```go
 viper.SetDefault("ContentDir", "content")
@@ -52,7 +54,7 @@ viper.SetDefault("LayoutDir", "layouts")
 viper.SetDefault("Taxonomies", map[string]string{"tag": "tags", "category": "categories"})
 ```
 
-### 3. 监听配置变化
+### 监听配置变化
 
 调用此函数后，`Viper` 会自动监听配置文件的变化，如果配置文件有更改，`Viper` 会更新自己的配置信息。
 
@@ -68,9 +70,9 @@ viper.OnConfigChange(func(e fsnotify.Event) {
 })
 ```
 
-## 二、读取值
+## 读取值
 
-### 1. 检查值是否设置
+### 检查值是否设置
 
 直接使用 `Viper` 去获取值时，如果这个 `key` 在配置文件中没有设置，那么会返回零值。所以如果需要判断值是否设置了这个 `key`，使用以下方法：
 
@@ -81,7 +83,7 @@ func IsSet(key string) bool
 func InConfig(key string) bool
 ```
 
-### 2. 获取值
+### 获取值
 
 获取单个配置的值：
 
@@ -106,7 +108,7 @@ func GetUint32(key string) uint32
 func GetUint64(key string) uint64
 ```
 
-### 3. 调试
+### 调试
 
 此方法可以打印注册的所有配置信息。
 
@@ -114,9 +116,9 @@ func GetUint64(key string) uint64
 viper.Debug()
 ```
 
-## 三、写入配置文件
+## 写入配置文件
 
-### 1. 更改设置
+### 更改设置
 
 在使用中可以更改既定的配置
 
@@ -124,7 +126,7 @@ viper.Debug()
 func Set(key string, value interface{})
 ```
 
-### 2. 写入配置文件
+### 写入配置文件
 
 更改配置之后，可以将当前配置写入配置文件
 

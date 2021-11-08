@@ -1,7 +1,7 @@
 ---
 title: "CSP 并发编程模型"
 description: 
-date: 2021-08-05
+date: 2021-08-05 00:00:00
 categories:
   - Golang 设计与原理
 tags:

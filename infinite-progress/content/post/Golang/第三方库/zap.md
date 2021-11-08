@@ -27,9 +27,11 @@ import "go.uber.org/zap"
 
 - 性能高，与 Zerolog 同一水平。
 
-## 一、创建 Logger
+<!--more-->
 
-### 1. New
+## 创建 Logger
+
+### New
 
 创建 `Logger` 最基础的方式是使用 `New` 方法：
 
@@ -69,7 +71,7 @@ logger := zap.New(
 defer logger.sync()
 ```
 
-### 2. Option
+### Option
 
 可以用于对 Logger 时进行一些配置，Zap 提供的 Option 如下：
 
@@ -86,7 +88,7 @@ func IncreaseLevel(lvl zapcore.LevelEnabler) Option  // 仅可以提高记录等
 func WrapCore(f func(zapcore.Core) zapcore.Core) Option  // 用于包裹或替换 Core
 ```
 
-### 3. 内置的 Logger
+### 内置 Logger
 
 由于 `New` 方法创建 Logger 过于复杂，`zap` 包中提供了几个内建的 Logger。
 
@@ -124,11 +126,11 @@ func WrapCore(f func(zapcore.Core) zapcore.Core) Option  // 用于包裹或替�
   func NewExample(options ...Option) *Logger
   ```
 
-## 二、使用  Config 创建 Logger
+## 使用  Config 创建 Logger
 
 除了使用 New 自定义创建外，使用 Config 来创建 Logger 会更加方便。
 
-### 1. Config
+### Config
 
 Config 包含了绝大部分常见的设置。其中部分设置需要使用 `zapcore.EncoderConfig` 来进行配置。
 
@@ -200,7 +202,7 @@ defer logger.Sync()
 logger.Info("logger construction succeeded")
 ```
 
-### 2. AtomicLevel
+### AtomicLevel
 
 这是 `Zap` 中用来表示日志级别的对象，可以原子性的修改。
 
@@ -231,9 +233,9 @@ const (
 )
 ```
 
-## 三、Logger
+## Logger
 
-### 1. 输出日志
+### 输出日志
 
 ```go
 func (log *Logger) Debug(msg string, fields ...Field)
@@ -245,7 +247,7 @@ func (log *Logger) Panic(msg string, fields ...Field)
 func (log *Logger) Fatal(msg string, fields ...Field)
 ```
 
-### 2. 全局 Logger
+### 全局 Logger
 
 使用 `ReplaceGlobals` 方法可以将 logger 设置为全局的 logger：
 
@@ -259,7 +261,7 @@ func ReplaceGlobals(logger *Logger) func()
 func L() *Logger
 ```
 
-### 3. SugaredLogger
+### SugaredLogger
 
 logger 在输出日志时，字段需要指定类型，较为麻烦，使用 `SugaredLogger` 则可以在输出日志时较为方便，但性能较低。获取 `SugaredLogger`：
 
@@ -267,7 +269,7 @@ logger 在输出日志时，字段需要指定类型，较为麻烦，使用 `Su
 func (log *Logger) Sugar() *SugaredLogger
 ```
 
-## 四、ZapCore
+## ZapCore
 
 `ZapCore` 是 Zap 中的核心部分，在需要细致且底层的配置时使用。
 
@@ -277,7 +279,7 @@ func (log *Logger) Sugar() *SugaredLogger
 import "go.uber.org/zap/zapcore"
 ```
 
-### 1. Core
+### Core
 
 创建 Core 主要使用 `NewCore` 方法：
 
@@ -318,7 +320,7 @@ func NewCore(enc Encoder, ws WriteSyncer, enab LevelEnabler) Core
 func NewTee(cores ...Core) Core
 ```
 
-### 2. EncoderConfig
+### EncoderConfig
 
 `zapcore.EncoderConfig` 用于配置 `zap.Config` 中的 Encoder。
 
@@ -402,7 +404,7 @@ Zap 也提供了一部分常用的编码器实现，可以根据需要使用：
   ```
 
 
-## 五、日志文件切割归档
+## 日志文件切割归档
 
 使用第三方库 `Lumberjack` 实现。安装：
 
@@ -410,7 +412,7 @@ Zap 也提供了一部分常用的编码器实现，可以根据需要使用：
 $ go get -u github.com/natefinch/lumberjack
 ```
 
-### 1. 接入 Zap
+### 接入 Zap
 
 ```go
 func logWriter() zapcore.WriteSyncer {

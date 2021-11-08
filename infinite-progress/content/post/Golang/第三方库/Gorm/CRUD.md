@@ -1,5 +1,5 @@
 ---
-title: "Golang 第三方库 Gorm CRUD"
+title: "Golang Gorm CRUD"
 description: 
 date: 2021-08-05
 categories:
@@ -11,9 +11,13 @@ series:
   - Golang Web 开发
 ---
 
-## 一、通用操作
+Gorm 常见 CRUD 操作 API。
 
-### 1. 批量操作
+<!--more-->
+
+## 通用操作
+
+### 批量操作
 
 最简单的方法是使用 `Table()` 方法，指定要操作的表名，这时候进行 `CRUD` 操作就是批量的。
 
@@ -27,7 +31,7 @@ db.Table("users").Update(...)
 db.Model(User{}).Update(...)
 ```
 
-### 2. 根据主键操作
+### 根据主键操作
 
 使用 `Model()` 方法，如果传入的模型实例有主键值，那么会默认只操作符合主键值的单条数据。
 
@@ -36,7 +40,7 @@ user := User{ID: 1}
 db.Model(&user).Update(...)
 ```
 
-### 3. Where
+### where
 
 除了使用主键选定操作数据，还可以使用 `Where` 设定条件。
 
@@ -86,7 +90,7 @@ db.Where(map[string]interface{}{"name": "jinzhu", "age": 20}).Find(&users)
 db.Where([]int64{20, 21, 22}).Find(&users)
 ```
 
-### 4. Not
+### not
 
 与 `Where` 相反。
 
@@ -114,7 +118,7 @@ db.Not("name = ?", "jinzhu").First(&user)
 db.Not(User{Name: "jinzhu"}).First(&user)
 ```
 
-### 5. Or
+### or
 
 ```go
 // SELECT * FROM users WHERE role = 'admin' OR role = 'super_admin';
@@ -129,7 +133,7 @@ db.Where("name = 'jinzhu'").Or(User{Name: "jinzhu 2"}).Find(&users)
 db.Where("name = 'jinzhu'").Or(map[string]interface{}{"name": "jinzhu 2"}).Find(&users)
 ```
 
-### 6. Order
+### order
 
 排序，设置第二个参数 `reorder` 为 `true` ，可以覆盖前面定义的排序条件。
 
@@ -147,7 +151,7 @@ db.Order("age desc").Order("name").Find(&users)
 db.Order("age desc").Find(&users1).Order("age", true).Find(&users2)
 ```
 
-### 7. Limit
+### limit
 
 ```go
 // SELECT * FROM users LIMIT 3;
@@ -159,7 +163,7 @@ db.Limit(3).Find(&users)
 db.Limit(10).Find(&users1).Limit(-1).Find(&users2)
 ```
 
-### 8. Offset
+### offset
 
 ```go
 // SELECT * FROM users OFFSET 3;
@@ -171,7 +175,7 @@ db.Offset(3).Find(&users)
 db.Offset(10).Find(&users1).Offset(-1).Find(&users2)
 ```
 
-### 9. Count
+### count
 
 `Count` 必须是链式查询的最后一个操作 ，因为它会覆盖前面的 `SELECT`，但如果里面使用了 `count` 时不会覆盖。
 
@@ -190,7 +194,7 @@ db.Table("deleted_users").Count(&count)
 db.Table("deleted_users").Select("count(distinct(name))").Count(&count())
 ```
 
-## 二、插入
+## 插入
 
 判断数据是否存在于数据库中：
 
@@ -205,7 +209,7 @@ db.NewRecord(user)
 db.Create(&user)
 ```
 
-### 1. 插入前处理
+### 插入前处理
 
 如果想在插入数据前做一定的处理，可以为模型设置 `BeforeCreate()` 方法：
 
@@ -216,11 +220,11 @@ func (user *User) BeforeCreate(scope *gorm.Scope) error {
 }
 ```
 
-## 三、查询
+## 查询
 
 查询单条数据时可以使用单个 `user` 接收数据，如果查询到的是多条数据，需要使用切片 `users` 进行接收。
 
-### 1. 根据主键查询数据
+### 根据主键查询数据
 
 ```go
 // 根据主键查询第一条记录
@@ -244,7 +248,7 @@ db.Find(&users)
 db.First(&user, 10)
 ```
 
-### 2. 内联条件
+### 内联条件
 
 当多个立即执行方法一起使用时，会默认共享前一个执行方法的条件。如果不希望共享，可以使用内联条件。
 
@@ -273,7 +277,7 @@ db.Find(&users, User{Age: 20})
 db.Find(&users, map[string]interface{}{"age": 20})
 ```
 
-## 四、更新
+## 更新
 
 ```go
 db.First(&user)
@@ -285,7 +289,7 @@ db.Save(&user)
 
 `Save` 会更新所有字段，即使你没有更改这个字段的值。
 
-### 1. 更新指定字段
+### 更新指定字段
 
 只更新指定的字段可以使用 `Update` 或 `Updates`。
 
@@ -330,7 +334,7 @@ db.Save(&user)
   db.Model(&user).Omit("name").Updates(map[string]interface{}{"name": "hello", "age": 18, "actived": false})
   ```
 
-### 2. 忽略中间件
+### 忽略中间件
 
 使用 `Update` 和 `Updates` 更新时会调用默认的 `BeforeUpdate()` 和 `AfterUpdate` 方法，这些默认方法会更新 `UpdateAt` 时间戳。
 
@@ -346,14 +350,14 @@ db.Model(&user).UpdateColumns(User{Name: "hello", Age: 18})
 //// UPDATE users SET name='hello', age=18 WHERE id = 111;
 ```
 
-### 3. 使用 SQL 表达式
+### 使用 SQL 表达式
 
 ```go
 DB.Model(&product).Update("price", gorm.Expr("price * ? + ?", 2, 100))
 //// UPDATE "products" SET "price" = price * '2' + '100', "updated_at" = '2013-11-17 21:34:10' WHERE "id" = '2';
 ```
 
-## 五、删除
+## 删除
 
 删除时确保主键字段有值，GORM 会通过主键去删除记录，如果主键为空，GORM 会删除该 model 的所有记录。
 

@@ -1,15 +1,13 @@
 ---
 title: "Golang 第三方库 grpc"
 description: 
-date: 2021-08-05
+date: 2021-08-05 00:00:00
 categories:
   - Golang 第三方库
 tags:
   - Golang
 series:	
 ---
-
-# GRPC
 
 `gRPC` 是一个高性能、通用的开源 RPC 框架，由 Google 主要面向移动应用开发并基于 `HTTP/2` 协议标准而设计，基于 `ProtoBuf(Protocol Buffers)` 序列化协议开发，且支持众多开发语言。
 
@@ -23,9 +21,11 @@ series:
 
 使用 gRPC 能更容易编写跨语言的分布式代码。
 
-## 一、安装
+<!--more-->
 
-### 1. 安装 grpc 包
+## 安装
+
+### 安装 grpc 包
 
 ```sh
 $ go get google.golang.org/grpc
@@ -37,7 +37,7 @@ $ go get google.golang.org/grpc
 import "google.golang.org/grpc"
 ```
 
-### 2. 安装 protocol buffer 编译器
+### 安装 protocol buffer 编译器
 
 1. 到此地址根据系统下载编译好的编译器：
 
@@ -53,7 +53,7 @@ import "google.golang.org/grpc"
    $ go get -u github.com/golang/protobuf/protoc-gen-go
    ```
 
-## 二、使用方式
+## 用法
 
 `gRPC` 开发流程：
 
@@ -61,7 +61,7 @@ import "google.golang.org/grpc"
 2. 编写服务端代码。
 3. 编写客户端代码。
 
-### 1. .proto 文件
+### .proto 文件
 
 ```protobuf
 syntax = "proto3"; // 版本声明，使用Protocol Buffers v3版本
@@ -93,7 +93,7 @@ $ protoc -I helloworld/ helloworld/pb/helloworld.proto --go_out=plugins=grpc:hel
 
 在 `gRPC_demo/helloworld/pb` 目录下会生成 `helloworld.pb.go` 文件。
 
-### 2. server
+### server
 
 ```go
 package main
@@ -135,7 +135,7 @@ func main() {
 }
 ```
 
-### 3. client
+### client
 
 ```go
 package main
@@ -166,7 +166,7 @@ func main() {
 }
 ```
 
-## 三、Protocol Buffers
+## Protocol Buffers
 
 示例：
 
@@ -193,7 +193,7 @@ message SearchResponse {
 - `syntax = "proto3";` 是我们使用的协议版本。
 - `message` 的每个字段都有个 index，范围在 1~15 之间时编码只需要一个字节，所以性能要求更高的字段尽量使用这个范围内的 index。此 index 后续不要修改。
 
-### 1. 字段类型
+### 字段类型
 
 这是 `grpc` 的类型与 Python、Go 类型的对应表。
 
@@ -215,13 +215,13 @@ message SearchResponse {
 | string      | A string must always contain UTF-8 encoded or 7-bit ASCII text, and cannot be longer than 232. | str/unicode | string  |
 | bytes       | May contain any arbitrary sequence of bytes no longer than 232. | str         | []byte  |
 
-### 2. 字段规则
+### 字段规则
 
 在字段类型前可以定义字段的规则：
 
 - `repeated`: 此字段可以出现多次，等同于一个数组
 
-### 3. reserved
+### reserved
 
 保留字段，用于声明某些 `index` 不能使用，也可以声明字段名。
 
@@ -232,7 +232,7 @@ message Foo {
 }
 ```
 
-### 4. enum
+### enum
 
 枚举类型
 
@@ -254,7 +254,7 @@ message SearchRequest {
 }
 ```
 
-### 5. import
+### import
 
 Protocol Buffers 支持从多个文件导入已经写好的代码。
 
@@ -262,7 +262,7 @@ Protocol Buffers 支持从多个文件导入已经写好的代码。
 import "myproject/other_protos.proto";
 ```
 
-### 6. 嵌套 Message
+### 嵌套 Message
 
 ```protobuf
 message SearchResponse {
@@ -283,7 +283,7 @@ message SomeOtherMessage {
 }
 ```
 
-### 7. Package
+### Package
 
 用于声明当前文件的包名，这样在其他文件导入此文件时，可以使用包名来索引到具体 message：
 
@@ -302,7 +302,7 @@ message Foo {
 }
 ```
 
-### 8. 生成 Go 代码
+### 生成 Go 代码
 
 生成使用 grpc 的代码。
 

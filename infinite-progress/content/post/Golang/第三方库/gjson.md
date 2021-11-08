@@ -1,7 +1,7 @@
 ---
 title: "Golang 第三方库 gjson"
 description: 
-date: 2021-08-05
+date: 2021-08-05 00:00:00
 categories:
   - Golang 第三方库
 tags:
@@ -11,15 +11,17 @@ series:
 
 这是一个主要功能为从 Json 中提取值的包。
 
+<!--more-->
+
 安装：
 
 ```bash
 go get -u github.com/tidwall/gjson
 ```
 
-## 一、获取 Json 值
+## 获取 Json 值
 
-### 1. 获取单个值
+### 获取单个值
 
 获取值最常用的是这两个方法，可以直接从 Json 数据中根据你提供的 `path` 提取结果。
 
@@ -32,7 +34,7 @@ func Get(json, path string) Result
 func GetBytes(json []byte, path string) Result
 ```
 
-### 2. 获取多个值
+### 获取多个值
 
 如果要同时获取多个值，可以使用以下方法。
 
@@ -43,7 +45,7 @@ func GetManyBytes(json []byte, path ...string) []Result
 
 这两个方法可以传入多个 `path` 路径，返回的是一个以 `Result` 组成的切片。
 
-### 3. 解析
+### 解析
 
 将 Json 数据直接解析成 Result。
 
@@ -52,7 +54,7 @@ func Parse(json string) Result
 func ParseBytes(json []byte) Result
 ```
 
-## 二、路径语法
+## 路径语法
 
 `Gjson` 的路径主要由 `.` 分割的字段名构成，其中还包含一些特殊的符号。
 
@@ -72,7 +74,7 @@ func ParseBytes(json []byte) Result
 }
 ```
 
-### 1. 基础语法
+### 基础语法
 
 以下是通过 `.` 代表层级递进的语法：
 
@@ -94,7 +96,7 @@ friends.1.first        "Roger"
 
 **注意：特殊符号 `*`, `?`, `.` 等符号如果出现在 Json 字段名中，则路径需要使用 `\` 转义。**
 
-### 2. 通配符
+### 通配符
 
 路径中可以使用通配符 `*` 和 `?`。
 
@@ -106,7 +108,7 @@ child*.2               "Jack"
 c?ildren.0             "Sara"
 ```
 
-### 3. 查询语法
+### 查询语法
 
 Json 数组还可以使用 `#` 来进一步获取值：
 
@@ -130,7 +132,7 @@ friends.#(first%"D*").last          "Murphy"
 friends.#(first!%"D*").last         "Craig"
 ```
 
-### 4. 修饰符
+### 修饰符
 
 使用修饰符可以实现一些特定的效果，目前有三个内置的修饰符：
 
@@ -153,11 +155,11 @@ children.@reverse.0                 "Jack"
 
 其可以使用的参数有：`sortKeys`, `indent`, `prefix`, and `width`.
 
-## 三、Result
+## Result
 
 `Gjson` 获取的内容都是 `Result` 类型的数据。
 
-### 1. 获取值数据
+### 获取值数据
 
 确定值的类型的获取方法
 
@@ -189,7 +191,7 @@ array   >> []interface{}
 object  >> map[string]interface{}
 ```
 
-### 2. 功能方法
+### 功能方法
 
 ```go
 // 用于链式调用获取值
@@ -203,7 +205,7 @@ func (t Result) ForEach(iterator func(key, value Result) bool)
 func (t Result) Less(token Result, caseSensitive bool) bool
 ```
 
-### 3. 字段
+### 字段
 
 `Result` 还含有一些有用的字段。
 
@@ -215,7 +217,7 @@ result.Raw     // 获取原始的 Json 文本
 result.Index   // 在原始 Json 数据中的索引，0 表示 Gjson无法识别
 ```
 
-## 四、检查 Json
+## 检查 Json
 
 在使用 `Get` 等方法获取值时，默认给予的 Json 数据为格式正确的，如果格式错误并不会报错，只会返回期望外的数据。
 
@@ -228,7 +230,7 @@ if !gjson.Valid(json) {
 value := gjson.Get(json, "name.last")
 ```
 
-## 五、Bytes 数据
+## Bytes 数据
 
 如果希望全程使用 `[]byte` 处理数据，而避免将 `result.Raw` 从字符串转换为 `[]byte`，可以使用以下方法：
 
@@ -243,7 +245,7 @@ if result.Index > 0 {
 }
 ```
 
-## 六、Jsoniter
+## Jsoniter
 
 将 Go 中数据转换成 Json 的方法，`Gjson` 中已经弃用了，建议使用滴滴开源的的 `jsoniter`。
 
@@ -262,7 +264,7 @@ jsoniter.Marshal(&data)
 jsoniter.Unmarshal(input, &data)
 ```
 
-### 1. 兼容标准库
+### 兼容标准库
 
 `jsoniter` 还提供了完全兼容标准库的使用方式。
 

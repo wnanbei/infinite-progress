@@ -1,7 +1,7 @@
 ---
-title: "Golang 第三方库 Gin Swagger"
+title: "Gin 配置 Swagger 接口文档"
 description: 
-date: 2021-08-05
+date: 2020-08-05 00:00:00
 categories:
   - Golang 第三方库
 tags:
@@ -11,7 +11,9 @@ series:
   - Golang Web 开发
 ---
 
-此包用于自动化生成 API 文档
+此包用于自动化生成 API 文档。
+
+<!--more-->
 
 下载 `swag` 工具：
 
@@ -26,9 +28,9 @@ $ go get -u github.com/swaggo/gin-swagger
 $ go get -u github.com/swaggo/files
 ```
 
-## 一、使用
+## 使用
 
-### 1. 启用文档
+### 启用文档
 
 1. 首先需要在项目代码中根据需求编写相应的注释。
 
@@ -60,7 +62,7 @@ $ go get -u github.com/swaggo/files
 
 4. 启动后，就可以在 `http://localhost:8080/swagger/index.html` 看到 API 文档了。
 
-### 2. 禁用文档
+### 禁用文档
 
 很多时候我们不需要开启文档，这时候可以使用 `DisablingWrapHandler`。
 
@@ -70,7 +72,7 @@ r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "NA
 
 只要在运行程序前，将 `NAME_OF_ENV_VARIABLE` 环境变量设置成任何值，都将会禁用 `Swagger` 文档。
 
-## 二、API 整体文档
+## API 整体文档
 
 此注释用于声明整个 API 文档的信息，注释的位置在项目的 `main` 函数位置
 
@@ -82,7 +84,7 @@ r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "NA
 func main() {}
 ```
 
-### 1. 字段
+### 字段
 
 | 字段名                   | 说明                                                         | 示例                                            |
 | ------------------------ | ------------------------------------------------------------ | ----------------------------------------------- |
@@ -105,7 +107,7 @@ func main() {}
 | @schemes                 | 用空格分隔的请求的传输协议                                   | http https                                      |
 | @x-name                  | 扩展的键必须以x-开头，并且只能使用json值                     | {"key": "value"}                                |
 
-### 2. Markdown
+### Markdown
 
 如果文档中的短字符串不足以完整表达，或者需要展示图片，代码示例等类似的内容，则需要使用 `Markdown` 描述。
 
@@ -115,7 +117,7 @@ func main() {}
 | @tag.name                 | tag 的名称                                           |
 | @tag.description.markdown | tag 的描述，该描述将从名为 `tagname.md` 的文件中读取 |
 
-## 三、API 接口文档
+## API 接口文档
 
 此注释用于声明单个 API 接口的信息，注释的位置在具体的 `controller` 函数位置
 
@@ -133,7 +135,7 @@ func main() {}
 func FindUserByName(c *gin.Context) {}
 ```
 
-### 1. 字段
+### 字段
 
 | 字段名                | 描述                                                |
 | --------------------- | --------------------------------------------------- |
@@ -153,7 +155,7 @@ func FindUserByName(c *gin.Context) {}
 | @router               | 此 API 的路由路径                                   |
 | @x-name               | 扩展字段，必须以 `x-` 开头，并且只能使用 json 值    |
 
-### 2. MIME 类型
+### MIME 类型
 
 `swag` 接受所有格式正确的 MIME 类型, 即使匹配 `*/*`。
 
@@ -174,7 +176,7 @@ func FindUserByName(c *gin.Context) {}
 | jpeg                  | image/jpeg                        |
 | gif                   | image/gif                         |
 
-### 3. response
+### response
 
 声明响应，主要有 `success`, `failure`, `response` 三类，格式一致：
 
@@ -195,7 +197,7 @@ func FindUserByName(c *gin.Context) {}
 @Failure default {object} httputil.DefaultError
 ```
 
-### 4. router
+### router
 
 声明 API 的路由:
 
@@ -211,7 +213,7 @@ func FindUserByName(c *gin.Context) {}
 @Router /examples/groups/{group_id}/accounts/{account_id} [get]
 ```
 
-## 四、Param
+## Param
 
 此字段用于声明 API 接收的数据字段，用空格分隔，如下所示：
 
@@ -231,7 +233,7 @@ func FindUserByName(c *gin.Context) {}
 @Param collection query []string false "string collection" collectionFormat(multi)
 ```
 
-### 1. 直接声明
+### 直接声明
 
 1. `name` - 字段名
 2. `param_type` - 字段类型，说明此字段的类型
@@ -250,7 +252,7 @@ func FindUserByName(c *gin.Context) {}
 5. `comment` - 注释，通常是字段的描述
 6. `attribute` - 额外的属性，此部分为可选
 
-### 2. attribute
+### attribute
 
 直接声明中的字段都是必须字段，而 `attribute` 有部分额外功能
 
@@ -268,7 +270,7 @@ func FindUserByName(c *gin.Context) {}
 - 注1：`default` 对于必需的参数没有意义
 - 注2：与 JSON 模式不同，`default` 务必符合此参数的定义类型
 
-## 五、结构体字段
+## 结构体字段
 
 逐个编写 Param，Response 等字段是非常麻烦的，且不利于维护，所以通常使用 Struct 来定义字段的类型。
 
@@ -292,7 +294,7 @@ type Order struct { //in `proto` package
 
 - struct 字段后方的注释，会被读取为这个字段的描述
 
-### 1. Tag
+### Tag
 
 在使用 struct 作为数据的定义时，主要使用 struct 的 tag 作为声明的方式。
 
@@ -306,7 +308,7 @@ type Order struct { //in `proto` package
 
 - 除此之外，还包括 Param 的 Attribute 也可以使用到 Tag 中。
 
-### 2. 重命名模型
+### 重命名模型
 
 在展示时更改模型名称
 
