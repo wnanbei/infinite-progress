@@ -11,7 +11,7 @@
         <div class="section-details">
             <h3 class="section-count">{{ T "list.page" (len .Pages) }}</h3>
             <h1 class="section-term">{{ .Title }}</h1>
-            {{ with .Params.description }}
+            {{ with .Summary }}
                 <h2 class="section-description">{{ . }}</h2>
             {{ end }}
         </div>
