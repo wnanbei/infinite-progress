@@ -1,14 +1,14 @@
 ---
-title: "Golang 标准库 sync.WaitGroup"
+title: "Go 标准库 sync.WaitGroup"
 description: 
 date: 2021-05-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
   - sync
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 

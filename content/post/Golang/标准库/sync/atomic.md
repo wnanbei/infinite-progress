@@ -1,15 +1,15 @@
 ---
-title: "Golang 原子操作 atomic"
+title: "Go 原子操作 atomic"
 description: 
 date: 2021-05-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
   - sync
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 `atomic` 包封装了系统底层的原子操作。官方建议尽量少使用此包的原子操作，尽量遵循通过通信分享内存，而不是通过分享内存来通信的原则。

@@ -1,15 +1,15 @@
 ---
-title: "Golang net/http client 客户端"
+title: "Go net/http client 客户端"
 description: 
 date: 2019-01-01 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 
-Golang 中的`net`包封装了大部分网络相关的功能，我们基本不需要借助其他库就能实现我们的爬虫需求。
+Go 中的`net`包封装了大部分网络相关的功能，我们基本不需要借助其他库就能实现我们的爬虫需求。
 
 <!--more--> 
 
@@ -200,7 +200,7 @@ import "golang.org/x/net/publicsuffix"
 
 ## Request
 
-这是Golang源码中Request定义的字段，可以看到非常的多，有兴趣的可以去源码或者官方文档看有注释的版本，本文只介绍一些比较重要的字段。
+这是Go源码中Request定义的字段，可以看到非常的多，有兴趣的可以去源码或者官方文档看有注释的版本，本文只介绍一些比较重要的字段。
 
 ```go
 type Request struct {

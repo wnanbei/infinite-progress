@@ -3,12 +3,12 @@ title: "Gin 配置 Swagger 接口文档"
 description: 
 date: 2020-08-05 00:00:00
 categories:
-  - Golang 第三方库
+  - Go第三方库
 tags:
-  - Golang
+  - Go
   - Gin
 series:	
-  - Golang Web 开发
+  - Go Web 开发
 ---
 
 此包用于自动化生成 API 文档。

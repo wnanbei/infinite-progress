@@ -1,14 +1,14 @@
 ---
-title: "Golang GMP 调度器"
+title: "Go GMP 调度器"
 description: 
 date: 2021-08-01 00:00:00
 categories:
-  - Golang 设计与原理
+  - Go设计与原理
 tags:
-  - Golang
+  - Go
   - Concurrency
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 typora-root-url: ..\..\..\..\static
 ---
 

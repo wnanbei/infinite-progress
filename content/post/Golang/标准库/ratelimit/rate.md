@@ -1,14 +1,14 @@
 ---
-title: "Golang 令牌桶限流器 golang.org/x/time/rate"
+title: "Go 令牌桶限流器 golang.org/x/time/rate"
 description: 
 date: 2021-10-25 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 `golang.org/x/time/rate` 提供了一个使用令牌桶 `Token Bucket` 算法实现的限流器。

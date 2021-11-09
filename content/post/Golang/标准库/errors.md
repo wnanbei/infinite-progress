@@ -1,15 +1,15 @@
 ---
-title: "Golang 错误处理 errors"
+title: "Go 错误处理 errors"
 description: 
 date: 2020-06-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 
-`errors` 用于增强 Golang 的错误处理能力。
+`errors` 用于增强 Go 的错误处理能力。
 
 <!--more-->
 

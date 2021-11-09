@@ -1,14 +1,14 @@
 ---
-title: "Golang 代码检查工具 golangci-lint"
+title: "Go 代码检查工具 golangci-lint"
 date: 2021-11-01 00:00:00
 categories:
-  - Golang 语言规范
+  - Go语言规范
 tags:
-  - Golang
+  - Go
 series:
 ---
 
-`golangci-lint` 是一个代码检查工具的集合，聚集了多种 Golang 代码检查工具，如 `golint`、`go vet` 等。
+`golangci-lint` 是一个代码检查工具的集合，聚集了多种 Go 代码检查工具，如 `golint`、`go vet` 等。
 
 优点：
 
@@ -38,7 +38,7 @@ brew upgrade golangci-lint
 
 ```shell
 # binary will be $(go env GOPATH)/bin/golangci-lint
-curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
+curl -sSfL https://raw.githubusercontent.com/Goci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
 
 golangci-lint --version
 ```

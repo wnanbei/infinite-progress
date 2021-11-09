@@ -1,13 +1,13 @@
 ---
-title: "Golang 并发消息队列 channel"
+title: "Go 并发消息队列 channel"
 date: 2019-11-01 00:00:00
 categories:
-  - Golang 语法
+  - Go语法
 tags:
-  - Golang
+  - Go
   - Concurrency
 series:
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 `Channel` 实际上是类型化消息的队列，它有以下特性：

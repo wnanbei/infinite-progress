@@ -1,11 +1,11 @@
 ---
-title: "Golang 反射 reflect"
+title: "Go 反射 reflect"
 description: 
 date: 2020-06-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 

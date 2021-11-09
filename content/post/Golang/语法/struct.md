@@ -1,10 +1,10 @@
 ---
-title: "Golang 结构体 struct"
+title: "Go 结构体 struct"
 date: 2019-11-01 00:00:00
 categories:
-  - Golang 语法
+  - Go语法
 tags:
-  - Golang
+  - Go
 series:
 ---
 

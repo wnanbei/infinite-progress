@@ -1,5 +1,5 @@
 ---
-title: "Golang"
+title: "Go"
 weight: -1000
 ---
 

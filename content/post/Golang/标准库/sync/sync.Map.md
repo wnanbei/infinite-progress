@@ -1,14 +1,14 @@
 ---
-title: "Golang 并发安全的 sync.Map"
+title: "Go 并发安全的 sync.Map"
 date: 2021-05-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
   - sync
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 `sync.Map` 是标准库 `sync` 中实现的并发安全的 map。

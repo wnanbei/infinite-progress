@@ -1,11 +1,11 @@
 ---
-title: "Golang 字符串处理 strings"
+title: "Go 字符串处理 strings"
 description: 
 date: 2021-08-05
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 

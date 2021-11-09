@@ -1,14 +1,14 @@
 ---
-title: "Golang 系统库 os"
+title: "Go 系统库 os"
 date: 2020-05-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 
-`os` 库主要用于 Golang 的文件、系统相关操作。
+`os` 库主要用于 Go 的文件、系统相关操作。
 
 <!--more-->
 

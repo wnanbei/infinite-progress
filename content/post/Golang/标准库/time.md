@@ -1,15 +1,15 @@
 ---
-title: "Golang 时间处理库 time"
+title: "Go 时间处理库 time"
 description: 
 date: 2020-06-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 
-time 是 Golang 用于处理时间的标准库，包括格式化、计算、修改、定时、超时等功能。
+time 是 Go 用于处理时间的标准库，包括格式化、计算、修改、定时、超时等功能。
 
 <!--more-->
 

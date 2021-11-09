@@ -1,14 +1,14 @@
 ---
-title: "Golang Gorm CRUD"
+title: "Go Gorm CRUD"
 description: 
 date: 2021-08-05
 categories:
-  - Golang 第三方库
+  - Go第三方库
 tags:
-  - Golang
+  - Go
   - Gorm
 series:	
-  - Golang Web 开发
+  - Go Web 开发
 ---
 
 Gorm 常见 CRUD 操作 API。

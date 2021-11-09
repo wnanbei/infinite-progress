@@ -1,10 +1,10 @@
 ---
-title: "Golang interface 接口"
+title: "Go interface 接口"
 date: 2019-10-01 00:00:00
 categories:
-  - Golang 语法
+  - Go语法
 tags:
-  - Golang
+  - Go
 series:
 ---
 

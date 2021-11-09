@@ -1,10 +1,10 @@
 ---
-title: "Golang 包管理 Package"
+title: "Go 包管理 Package"
 date: 2019-08-01 00:00:00
 categories:
-  - Golang 语法
+  - Go语法
 tags:
-  - Golang
+  - Go
 series:
 ---
 

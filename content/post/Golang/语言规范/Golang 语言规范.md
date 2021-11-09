@@ -1,14 +1,14 @@
 ---
-title: "Golang 语言规范"
+title: "Go 语言规范"
 date: 2019-01-01 00:00:00
 categories:
-  - Golang 语言规范
+  - Go语言规范
 tags:
-  - Golang
+  - Go
 series:
 ---
 
-Golang 语言规范指导性原则：
+Go 语言规范指导性原则：
 
 1. 简单性
 2. 可读性

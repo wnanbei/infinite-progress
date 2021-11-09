@@ -1,15 +1,15 @@
 ---
-title: "Golang 对象池 sync.Pool"
+title: "Go 对象池 sync.Pool"
 description: 
 date: 2021-05-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
   - sync
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 sync.Pool 是一个协程安全的内存池。主要用于增加临时对象的内存复用率，减少内存分配和 GC STW 的开销。、
@@ -89,7 +89,7 @@ sync.Pool 的 local 是一个切片，存储了多个 `poolLocal` 对象，每�
 
 ### victim 机制
 
-在 `golang 1.13` 版本中，新增了 victim 机制来优化 sync.Pool 的性能。
+在 `Go 1.13` 版本中，新增了 victim 机制来优化 sync.Pool 的性能。
 
 在旧版本中，每次 GC 都会将 Pool 中所有闲置的对象全部回收。此时如果存在大量的闲置对象，那么 GC 的 STW 压力会骤然变大，消耗的时间也会变长，重新 New 创建对象的消耗也会变大。
 

@@ -1,11 +1,11 @@
 ---
-title: "Golang 第三方库 zap"
+title: "Go 第三方库 zap"
 description: 
 date: 2021-08-05
 categories:
-  - Golang 第三方库
+  - Go第三方库
 tags:
-  - Golang
+  - Go
 series:	
 ---
 

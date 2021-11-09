@@ -1,15 +1,15 @@
 ---
-title: "Golang 读写锁 sync.RWMutex"
+title: "Go 读写锁 sync.RWMutex"
 description: 
 date: 2021-05-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
   - sync
 series:	
-  - Golang 面试大全	
+  - Go 面试大全	
 ---
 
 `sync.RWMutex` 是一个读写锁，在读多写少的场景中，比 Mutex 的并发能力有很大的提升。

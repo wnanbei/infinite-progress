@@ -1,13 +1,13 @@
 ---
-title: "Golang GC 垃圾回收"
+title: "Go GC 垃圾回收"
 description: 
 date: 2021-08-05 00:00:00
 categories:
-  - Golang 设计与原理
+  - Go设计与原理
 tags:
-  - Golang
+  - Go
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 垃圾回收 - `GC` - `garbage collection` 是自动内存管理的一种形式。通常由垃圾收集器收集并适时回收或重用不再被对象占用的内存。
@@ -109,7 +109,7 @@ reference counting
 - 这种策略没有办法及时回收老一代的对象。
 - 需要额外开销引用和区分新老对象，特别是有多代的时候。
 
-## Golang GC
+## Go GC
 
 ### 三色标记法
 

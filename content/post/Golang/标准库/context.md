@@ -1,14 +1,14 @@
 ---
-title: "Golang 上下文 context"
+title: "Go 上下文 context"
 description: 
 date: 2020-06-05 00:00:00
 categories:
-  - Golang 标准库
+  - Go标准库
 tags:
-  - Golang
+  - Go
   - Concurrency
 series:	
-  - Golang 面试大全
+  - Go 面试大全
 ---
 
 context 指的是上下文，以下是几种 ctx 类型:
