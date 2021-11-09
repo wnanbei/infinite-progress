@@ -1,4 +1,4 @@
-## 一、INSERT
+## INSERT
 
 使用 `INSERT` 语句可以快速便利的插入一条或多条数据到表中。
 
@@ -55,11 +55,11 @@ INSERT [LOW_PRIORITY | DELAYED | HIGH_PRIORITY] [IGNORE]
 
 - `[LOW_PRIORITY | DELAYED | HIGH_PRIORITY]` - 插入语句的优先级。
 
-## 二、INSERT SELECT
+## INSERT SELECT
 
 `INSERT ... SELECT`是带有`SELECT`字句的`INSERT`语句，可以将`SELECT`查询到的多行结果插入到表中。
 
-### 1. 语法
+### 语法
 
 ```mysql
 INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]
@@ -78,9 +78,9 @@ INSERT INTO tb_name2 (fld_id)
   FROM tb_name1 WHERE tb_name1.fld_order_id > 100;
 ```
 
-## 三、UPDATE
+## UPDATE
 
-### 1. 语法
+### 语法
 
 ```mysql
 UPDATE [LOW_PRIORITY] [IGNORE] table_reference
@@ -90,7 +90,7 @@ UPDATE [LOW_PRIORITY] [IGNORE] table_reference
     [LIMIT row_count]
 ```
 
-### 2. 关键字
+### 关键字
 
 - `table_reference` - 要更新的表名
 
@@ -129,9 +129,9 @@ UPDATE [LOW_PRIORITY] [IGNORE] table_reference
 
 - `[LOW_PRIORITY]` - 降低更新语句的优先级。
 
-## 四、DELETE
+## DELETE
 
-### 1. 语法
+### 语法
 
 ```mysql
 DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tb_name
@@ -141,7 +141,7 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tb_name
     [LIMIT row_count]
 ```
 
-### 2. 关键词
+### 关键词
 
 - `[WHERE where_condition]`
 
@@ -169,13 +169,13 @@ DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tb_name
 DELETE FROM tb_name WHERE col_name=3;
 ```
 
-## 五、TRUNCATE
+## TRUNCATE
 
 `TRUNCATE`语句主要用于清空一张表的内容。当我们需要删除一张表时，应该使用`DROP`，当我们想要删除表中一部分数据的时候，我们应该使用`DELETE`。
 
 而当我们希望保存这张表但是删除里面所有数据的时候，我们就可以使用`TRUNCATE`。
 
-### 1. 语法
+### 语法
 
 ```mysql
 TRUNCATE [TABLE] tbl_name;

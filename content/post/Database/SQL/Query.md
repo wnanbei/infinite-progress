@@ -1,4 +1,4 @@
-## 一、语法
+
 
 ```mysql
 SELECT
@@ -31,7 +31,7 @@ SELECT
       | LOCK IN SHARE MODE]]
 ```
 
-### 1. 常用基础关键词
+### 常用基础关键词
 
 - `select_expr [, select_expr ...]`
 
@@ -114,7 +114,7 @@ SELECT
     SELECT * FROM tbl LIMIT 95,18446744073709551615;   #返回从96行开始所有的结果
     ```
 
-### 2. 修饰符
+### 修饰符
 
 跟在`SELECT`后有许多可以影响查询结果的修饰符可以使用，例如`HIGH_PRIORITY`、`STRAIGHT_JOIN`等。
 
@@ -140,9 +140,9 @@ SELECT
 
 **注：需要注意的是，`SELECT`子句的顺序都需要按照语法中给定的顺序来进行使用，`INTO`子句例外，它可以跟在`select_expr`列表后方。**
 
-## 二、聚合分组
+## 聚合分组
 
-### 1. 聚合函数
+### 聚合函数
 
 在MySQL中有一些对值的集合进行操作的函数可以使用，这被称为聚合函数，以下是常见的聚合函数：
 
@@ -191,7 +191,7 @@ SELECT
          GROUP BY student_name;
   ```
 
-### 2. GROUP BY
+### GROUP BY
 
 `GROUP BY`是`SELECT`语句中的子句，其可以指定字段，将这个字段中值相同的行分为一组，所以这个字段基本上都与聚合函数一起使用 ，能够根据不同条件统计数据。例如：
 
@@ -205,7 +205,7 @@ mysql> SELECT class, COUNT(name)
 
 需要注意的是，在使用了`GROUP BY`分组之后，那么前面`SELECT`查询的字段就只能使用分组的字段和聚合函数了，使用其他字段将会报错。
 
-## 三、JOIN
+## JOIN
 
 在MySQL中，支持在`SELECT`、`DELETE`和`UPDATE`的多表中使用`JOIN`语法。`JOIN`也被称为连接表达式，而连结又主要分为内连接以及外连接。
 
@@ -233,7 +233,7 @@ mysql> SELECT * FROM b;
 2 rows in set (0.00 sec)
 ```
 
-### 1. 内连接
+### 内连接
 
 MySQL中的`JOIN`，`CROSS JOIN`，`INNER JOIN`三者是等价的，都被视为内连接。在直接使用的时候，又被称为无条件内连接或笛卡尔连接，其会把两张表里的数据完全相互连接，形成`M * N`条数据。
 
@@ -266,7 +266,7 @@ mysql> SELECT * FROM a JOIN b ON a.id=b.id;
 1 row in set (0.00 sec)
 ```
 
-### 2. 外连接
+### 外连接
 
 在内连接中，可以看到如果没有符合`ON`字句的匹配条件，那么不符合的这些行将会被舍去。但是有一些情况下，我们希望保留下那些没有符合匹配条件的行，这个时候就可以使用外连接。
 
@@ -302,7 +302,7 @@ mysql> SELECT * FROM a RIGHT JOIN b ON a.id=b.id;
 2 rows in set (0.00 sec)
 ```
 
-## 四、子查询
+## 子查询
 
 子查询也就是说把一个查询嵌套在另一个查询中，子查询也被称为内部查询，包含内部查询的则被称为外部查询。
 
@@ -310,7 +310,7 @@ mysql> SELECT * FROM a RIGHT JOIN b ON a.id=b.id;
 
 子查询的位置一般会在`SELECT`中、`FROM`后、`WHERE`中。
 
-### 1. 分类
+### 分类
 
 子查询一般会被分为以下几类：
 

@@ -6,7 +6,6 @@ categories:
   - Golang 设计与原理
 tags:
   - Golang
-  - GC
 series:	
   - Golang 面试大全
 ---
