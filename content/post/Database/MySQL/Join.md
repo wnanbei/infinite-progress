@@ -1,12 +1,23 @@
-# Join
-
-## 执行流程
+---
+title: "MySQL Join 连接详解"
+date: 2021-02-06 00:00:00
+categories:
+  - MySQL
+tags:
+  - Database
+  - MySQL
+series:		
+---
 
 在 MySQL 中，不同的 Join 语句会使用不同的算法扫描数据。
 
 直接使用 Join 时，MySQL 的优化器会自动选定 Join 的驱动表，如果使用 `straight_join` 可以指定前表为驱动表。
 
-### 1. Index Nested-Loop Join
+<!--more-->
+
+## 执行流程
+
+### Index Nested-Loop Join
 
 当可以用上被驱动表的索引时，会使用 `Index Nested-Loop Join` 算法，简称 `NLJ`。
 
@@ -17,7 +28,7 @@
 
 由于查询 t2 被驱动表使用的是索引，所以 NLJ 的性能良好，比拆分成多条单表 SQL 性能更好。
 
-### 2. Block Nested-Loop Join
+### Block Nested-Loop Join
 
 当无法使用被驱动表上的索引时，需要全表扫描被驱动表，此时 MySQL 会使用 `Block Nested-Loop Join`，简称 `BNL`。
 
@@ -32,18 +43,18 @@
 
 ## 准则
 
-### 1. 是否可以使用 Join
+### 是否可以使用 Join
 
 1. 如果可以使用 NLJ，则可以使用 Join 语句，比拆分成多条单表 SQL 性能更好。
 2. 如果只能使用 BNL，则会占用大量系统资源，此情况避免使用 Join。
 
-### 2. Join 使用准则
+### Join 使用准则
 
 1. Join 关联字段必须建索引。
 2. 使用小表为驱动表。
 
 ## 优化
 
-### 1. MRR
+### MRR
 
-### 2. BKA
+### BKA
