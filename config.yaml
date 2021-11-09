@@ -1,7 +1,7 @@
 baseurl: https://wnanbei.com
 languageCode: zh-cn
 theme: hugo-theme-stack
-paginate: 10
+paginate: 8
 title: WNANBEI
 
 # Change it to your Disqus shortname before using
