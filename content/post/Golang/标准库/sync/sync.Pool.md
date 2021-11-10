@@ -10,6 +10,7 @@ tags:
   - sync
 series:	
   - Go 面试大全
+typora-root-url: ..\..\..\..\..\static
 ---
 
 sync.Pool 是一个协程安全的内存池。主要用于增加临时对象的内存复用率，减少内存分配和 GC STW 的开销。、
@@ -53,7 +54,7 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 以下是 sync.Pool 的整体结构：
 
-![](../../../assets/go/syncPool.webp)
+![](/images/go/syncPool.webp)
 
 **`local`**
 
@@ -81,11 +82,11 @@ sync.Pool 的 local 是一个切片，存储了多个 `poolLocal` 对象，每�
 
 **Pool.Get 执行流程：**
 
-![syncPoolGet](../../../assets/go/syncPoolGet.webp)
+![syncPoolGet](/images/go/syncPoolGet.webp)
 
 **Pool.Put 执行流程：**
 
-![syncPoolPut](../../../assets/go/syncPoolPut.webp)
+![syncPoolPut](/images/go/syncPoolPut.webp)
 
 ### victim 机制
 
@@ -97,7 +98,7 @@ victim 机制，则是在 GC 时，将 `local` 中的所有对象移动到 `vict
 
 以下是新版的 **Pool GC 执行流程：**
 
-![syncPoolGC](../../../assets/go/syncPoolGC.webp)
+![syncPoolGC](/images/go/syncPoolGC.webp)
 
 在此过程中，`Get` 如果在 local 中找不到对象，会去 victim 中查找，Put 会将取出的对象重新放回 local 中。
 

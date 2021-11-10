@@ -9,8 +9,6 @@ series:
   - 面试大全
 ---
 
-![TCPIP协议-封面](assets/TCPIP协议-封面.png)
-
 **其实网络协议，就是为了所有的计算机能够在同一个网络中互相传递数据，而制定的数据传输规则。** 就好像我们只有说同一种语言才能互相交流一个道理，那么想要在互联网中传递数据，就得遵守标准的网络协议。
 
 <!--more--> 
@@ -25,8 +23,6 @@ series:
 
 OSI模型定义了网络互联的七层框架，也就是将网络协议从软件到硬件，从上到下的分成了七层，每层都为更高一层提供服务。
 
-![TCPIP协议-OSI七层模型](assets/TCPIP协议-OSI七层模型.png)
-
 虽然说OSI模型算是网络协议的框架标准，但是在实际的使用中，TCP/IP的五层协议使用的更加广泛。
 
 ## TCP/IP
@@ -38,8 +34,6 @@ TCP/IP是Internet互联网上所有主机间的共同协议。
 ### 结构
 
 而TCP/IP协议采用五层结构，其与OSI模型的各层对应关系为
-
-![TCPIP协议-协议结构对比](assets/TCPIP协议-协议结构对比.png)
 
 ## 网络分层
 
@@ -109,8 +103,6 @@ TCP为了保证不发生丢包，就给每个包一个序号，同时序号也�
 
 TCP传输的数据分为头部和数据部分。
 
-![TCPIP协议-TCP头信息](assets/TCPIP协议-TCP头信息.png)
-
 **各个段位说明:**
 
 - **源端口和目的端口**: 各占 2 字节.端口是传输层与应用层的服务接口.传输层的复用和分用功能都要通过端口才能实现
@@ -143,8 +135,6 @@ TCP传输的数据分为头部和数据部分。
 
 所谓三次握手，其实指的是TCP建立连接的过程，整个建立连接的过程需要发送三个包，来确认建立连接，具体流程如下：
 
-![TCPIP协议-三次握手](assets/TCPIP协议-三次握手.png)
-
 - 第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。
 - 第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。
 - 第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。
@@ -152,8 +142,6 @@ TCP传输的数据分为头部和数据部分。
 #### 四次挥手
 
 四次挥手指的则是断开连接的过程：
-
-![TCPIP协议-四次挥手](assets/TCPIP协议-四次挥手.png)
 
 - 第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。
 - 第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。

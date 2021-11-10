@@ -10,6 +10,7 @@ tags:
   - sync
 series:	
   - Go 面试大全
+typora-root-url: ..\..\..\..\..\static
 ---
 
 `sync.Mutex` 是一个互斥锁，默认为零值时为开锁状态。
@@ -67,11 +68,11 @@ const (
 
 - 非饥饿模式下，新获取锁的 G 将会进入自旋，去竞争锁。为了避免自旋消耗太多 cpu，G 最多会自旋 4 次,每次空转 30 个 cpu 时钟周期；
 
-![syncMutexLock](../../../assets/go/syncMutexLock.webp)
+![syncMutexLock](/images/go/syncMutexLock.webp)
 
 **Mutex UnLock 解锁流程：**
 
-![syncMutexUnlock](../../../assets/go/syncMutexUnlock.webp)
+![syncMutexUnlock](/images/go/syncMutexUnlock.webp)
 
 ### 饥饿状态
 

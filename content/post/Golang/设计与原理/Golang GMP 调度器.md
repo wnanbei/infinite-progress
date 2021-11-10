@@ -27,7 +27,7 @@ Go scheduler 的职责就是将所有处于 runnable 的 Goroutines 均匀分布
 
 <!--more-->
 
-![](/images/go/GMP模型.jpeg)
+![](/images/go/gmp.png)
 
 ## GMP 数据结构
 
@@ -163,7 +163,7 @@ M 与 P 的数量没有绝对关系，一个 M 阻塞，P 就会去创建或者�
 
 ## 调度流程
 
-![Go调度器生命周期](/images/go/go_schedule.png)
+![Go调度器生命周期](/images/go/schedule.png)
 
 ### M0
 

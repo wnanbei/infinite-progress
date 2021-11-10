@@ -9,6 +9,7 @@ tags:
   - sync
 series:	
   - Go 面试大全
+typora-root-url: ..\..\..\..\..\static
 ---
 
 `sync.Map` 是标准库 `sync` 中实现的并发安全的 map。
@@ -105,13 +106,13 @@ sync.Map 里面有两个普通 map，read map 主要负责读，dirty map 负责
 
 **sync.Map.Load() 取出对象流程：**
 
-![syncMapLoad](../../../assets/go/syncMapLoad.webp)
+![syncMapLoad](/images/go/syncMapLoad.webp)
 
 **sync.Map.Store() 插入对象流程：**
 
-![syncMapStore](../../../assets/go/syncMapStore.webp)
+![syncMapStore](/images/go/syncMapStore.webp)
 
 **sync.Map.LoadAndDelete() 删除对象流程：**
 
-![syncMapDelete](../../../assets/go/syncMapDelete.webp)
+![syncMapDelete](/images/go/syncMapDelete.webp)
 
