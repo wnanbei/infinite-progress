@@ -1,5 +1,6 @@
 ---
 title: "Redis"
+weight: -65
 ---
 
 Redis 是一款高性能、基于内存的 key-value 数据库，完全开源免费，遵守BSD协议。
