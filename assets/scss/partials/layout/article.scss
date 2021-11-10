@@ -320,9 +320,11 @@
     code {
         color: var(--code-text-color);
         background-color: var(--code-background-color);
-        padding: 2px 4px;
+        padding: 2px 6px;
+        margin: 2px 2px;
         border-radius: var(--tag-border-radius);
         font-family: var(--code-font-family);
+        font-size: 1.6rem;
     }
 
     .gallery {
