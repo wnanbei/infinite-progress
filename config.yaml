@@ -51,7 +51,7 @@ params:
         readingTime: true
         license:
             enabled: true
-            default: Licensed under CC BY-NC-SA 4.0
+            default: Licensed under MIT License
 
     comments:
         enabled: false
