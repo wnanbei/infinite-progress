@@ -1,4 +1,4 @@
-baseurl: https://wnanbei.com
+baseurl: https://wnanbei.github.io
 languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 8
