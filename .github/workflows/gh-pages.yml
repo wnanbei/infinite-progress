@@ -34,6 +34,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
+          deploy_key: "${{ secrets.ACTIONS_DEPLOY_KEY }}"
           publish_dir: "./"
           publish_branch: main
           keep_files: false
