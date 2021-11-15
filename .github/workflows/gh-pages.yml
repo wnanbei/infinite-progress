@@ -34,8 +34,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-	  external_repository: wnanbei/wnanbei.github.io
 	  publish_dir: ./
 	  publish_branch: main
 	  keep_files: false
-	  
+	  external_repository: wnanbei/wnanbei.github.io
