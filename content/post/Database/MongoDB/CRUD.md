@@ -9,6 +9,8 @@ tags:
 series:	
 ---
 
+MongoDB 官方中文文档：[MongoDB中文手册|官方文档中文版](https://docs.mongoing.com/)，基于 4.2 版本。
+
 <!--more-->
 
 ## Query
