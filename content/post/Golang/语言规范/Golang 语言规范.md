@@ -80,7 +80,7 @@ Go 语言规范指导性原则：
 
 #### 长度
 
-> The greater the distance between a name’s declaration and its uses, the longer the name should be. 
+> The greater the distance between a name’s declaration and its uses, the longer the name should be.
 >
 > 名字的声明与其使用之间的距离越大，名字应该越长。
 >
@@ -172,10 +172,6 @@ Go 语言规范指导性原则：
   var ErrFormat = errors.New("unknown format")
   ```
 
-  
-
-
-
 ## 注释
 
 注释应该做至少三件事中的一件：
@@ -240,7 +236,7 @@ Go 语言规范指导性原则：
 
 该许可证要求在所有的源文件中的头部放置以下内容才能算协议对该文件有效。
 
-```
+```License
 // Copyright [yyyy] [name of copyright owner]
 //
 // Licensed under the Apache License, Version 2.0 (the "License"): you may
@@ -264,7 +260,7 @@ Go 语言规范指导性原则：
 
 使用 MIT 授权的项目，需在源文件头部增加以下内容。
 
-```
+```License
 // Copyright [yyyy] [name of copyright owner]. All rights reserved.
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE file.

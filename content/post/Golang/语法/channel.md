@@ -170,4 +170,3 @@ defer close(ch)
 var c1 chan struct{}
 c1 <- struct{}{}
 ```
-

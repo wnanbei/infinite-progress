@@ -220,4 +220,3 @@ Go 中内存泄漏的几种情况：
 3. **Channel 泄漏**
 
    Channel 作为一种同步原语，会连接两个不同的 Goroutine，如果一个 Goroutine 尝试向一个没有接收方的无缓冲 Channel 发送消息，则该 Goroutine 会被永久的休眠，整个 Goroutine 及其执行栈都得不到释放。
-

@@ -965,4 +965,3 @@ severity:
       - dupl
       severity: info
 ```
-
