@@ -1,5 +1,5 @@
 ---
-title: "MongoDB CRUD 操作"
+title: "MongoDB find 查询"
 date: 2021-11-05 00:00:00
 categories:
   - MongoDB
@@ -9,31 +9,31 @@ tags:
 series:	
 ---
 
+MongoDB find 数据查询命令。
+
 MongoDB 官方中文文档：[MongoDB中文手册|官方文档中文版](https://docs.mongoing.com/)，基于 4.2 版本。
 
 <!--more-->
 
-## Query
-
-### 查询所有数据
+## 查询所有数据
 
 ```javascript
 db.inventory.find( {} )
 ```
 
-### 条件查询
+## 条件查询
 
 ```javascript
 db.inventory.find( { status: "D" } )
 ```
 
-`IN` 查询：
+### IN
 
 ```javascript
 db.inventory.find( { status: { $in: [ "A", "D" ] } } )
 ```
 
-`AND` 查询：
+### AND
 
 ```javascript
 db.inventory.find( {
@@ -42,7 +42,7 @@ db.inventory.find( {
 } )
 ```
 
-`OR` 查询：
+### OR
 
 ```javascript
 db.inventory.find( { 
@@ -53,7 +53,7 @@ db.inventory.find( {
 } )
 ```
 
-`AND` 和 `IN` 混用：
+### AND 和 IN 混用
 
 ```javascript
 db.inventory.find( {
@@ -65,7 +65,49 @@ db.inventory.find( {
 } )
 ```
 
-### 嵌套数据查询
+### 范围查询
+
+```javascript
+db.bios.find( { birth: { $gt: new Date('1940-01-01'), $lt: new Date('1960-01-01') } } )
+```
+
+## 返回结果筛选
+
+`sort`、`limit`、`skip` 三个命令的顺序不会影响执行的效果。
+
+### sort
+
+```javascript
+db.bios.find().sort( { name: 1, age: -1 } )
+```
+
+### limit
+
+```javascript
+db.bios.find().limit( 5 )
+```
+
+### skip
+
+跳过指定条数数据：
+
+```javascript
+db.bios.find().skip( 5 )
+```
+
+### countDocuments
+
+`count` 方法在没有设置 query 条件时，只能返回 collection 在 meta 中的不确切的数量，在 MongoDB 4.0 已被弃用。
+
+使用新的 `countDocuments` 方法返回确切的数据数量：
+
+```javascript
+db.orders.countDocuments( { ord_dt: { $gt: new Date('01/01/2012') } }, { limit: 100 } )
+```
+
+
+
+## 嵌套数据查询
 
 查询数据中嵌套的内容：
 
@@ -88,7 +130,7 @@ db.inventory.find( { "size.h": { $lt: 15 } } )
 db.inventory.find( { "size.h": { $lt: 15 }, "size.uom": "in", status: "D" } )
 ```
 
-### 数组查询
+## 数组查询
 
 数组完全匹配，包括顺序：
 
@@ -122,7 +164,7 @@ db.inventory.find( { "dim_cm.1": { $gt: 25 } } )
 db.inventory.find( { "tags": { $size: 3 } } )
 ```
 
-### 限制查询返回字段
+## 限制查询返回字段
 
 仅返回指定的字段：
 
@@ -147,7 +189,7 @@ db.inventory.find( { status: "A" }, { item: 1, status: 1, _id: 0 } )
 
 除了 `_id` 字段，其他字段不能进行组合。
 
-### null 值处理
+## null 值处理
 
 查询所有无此字段或字段值为 `null` 的数据：
 
@@ -165,98 +207,5 @@ db.inventory.find( { item : { $type: 10 } } )
 
 ```javascript
 db.inventory.find( { item : { $exists: false } } )
-```
-
-## Insert
-
-**特性：**
-
-- MongoDB 所有对单条数据的写操作都是原子操作；
-- 不指定 `_id` 会自动生成；
-- 插入数据会返回对应 `_id`
-
-### 单条插入
-
-```javascript
-db.inventory.insertOne(
-   { item: "canvas", qty: 100, tags: ["cotton"], size: { h: 28, w: 35.5, uom: "cm" } }
-)
-```
-
-### 批量插入
-
-```javascript
-db.inventory.insertMany([
-   { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
-   { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
-   { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }
-])
-```
-
-## Update
-
-**特性：**
-
-- MongoDB 所有对单条数据的写操作都是原子操作；
-- 一条数据插入之后，`_id` 字段将不能再更改和替换；
-- 对于写操作，mongo 会保留字段的顺序，除非以下情况：
-  1. `_id` 字段始终排在第一位。
-  2. 字段重命名可能会导致文档字段重新排序。
-
-### 单条更新
-
-```javascript
-db.inventory.updateOne(
-   { item: "paper" },
-   {
-     $set: { "size.uom": "cm", status: "P" },
-     $currentDate: { lastModified: true }
-   }
-)
-```
-
-### 批量更新
-
-```javascript
-db.inventory.updateMany(
-   { "qty": { $lt: 50 } },
-   {
-     $set: { "size.uom": "in", status: "P" },
-     $currentDate: { lastModified: true }
-   }
-)
-```
-
-### 替换数据
-
-完全替换此条数据。
-
-```javascript
-db.inventory.replaceOne(
-   { item: "paper" },
-   { item: "paper", instock: [ { warehouse: "A", qty: 60 }, { warehouse: "B", qty: 40 } ] }
-)
-```
-
-## Delete
-
-**特性：**
-
-- MongoDB 所有对单条数据的写操作都是原子操作；
-- 就算删除了全部数据，也不会删除索引。
-
-### 单条删除
-
-单条删除会删除匹配到的第一条数据：
-
-```javascript
-db.inventory.deleteOne( { status: "D" } )
-```
-
-### 批量删除
-
-```javascript
-db.inventory.deleteMany({})
-db.inventory.deleteMany({ status : "A" })
 ```
 
